@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import TokenAmount from 'token-amount'
 import { useViewport } from 'use-viewport'
 import * as Sentry from '@sentry/browser'
+import AccountModule from 'components/AccountModule/AccountModule'
 import ButtonGroup from 'components/ButtonGroup/ButtonGroup'
 import Logo from 'components/Logo/Logo'
 import Input from 'components/Input/Input'
@@ -19,7 +20,6 @@ import {
   useBalanceOf,
   useTokenDecimals,
   useTokenUniswapInfo,
-  useTotalUniStaked,
   useUniStaked,
   useWithdraw,
 } from 'lib/web3-contracts'
@@ -167,7 +167,9 @@ export default function StakeModule() {
   return (
     <div
       css={`
-        margin-top: 96px;
+        min-width: 880px;
+        min-height: 492px;
+        margin: 0 auto;
       `}
     >
       <main
@@ -177,12 +179,11 @@ export default function StakeModule() {
           justify-content: center;
           width: 100%;
           height: 100%;
-          max-width: 762px;
-          background: #ffffff;
+          background: #312D36;
           mix-blend-mode: normal;
           box-shadow: 0px 2px 2px rgba(87, 95, 119, 0.15);
           border-radius: 6px;
-          padding: 32px;
+          padding: 20px;
           ${isCompact &&
             `
             max-width: 362px;
@@ -192,25 +193,38 @@ export default function StakeModule() {
           `}
         `}
       >
-        <ButtonGroup
-          activeKey={activeKey}
-          disabled={disabled}
-          elements={SECTIONS}
-          isCompact={isCompact}
-          onSetActiveKey={setActiveKey}
-        />
+        <div css={`
+            margin: 0 -16px;
+            background: #3C3846;
+            border-bottom: 1px solid #55525F;
+        `}>
+          <ButtonGroup
+            activeKey={activeKey}
+            disabled={disabled}
+            elements={SECTIONS}
+            isCompact={isCompact}
+            onSetActiveKey={setActiveKey}
+          />
+         {/* <AccountModule />*/}
+        </div>
 
         {SECTIONS[activeKey].id === 'stake' && (
-          <Info mode="info" height="40" padding="16" Compact={isCompact}>
-            <a
+          <Info mode="info" height="40" padding="0" Compact={isCompact}>
+            Learn&nbsp;
+            <StyledLink
               rel="noopener noreferrer"
               target="_blank"
               href="https://aragon.org/blog/liquidity-rewards"
             >
               {' '}
-              Learn how to obtain UNI to participate in the rewards program
-            </a>
-            .
+              how to obtain UNI
+            </StyledLink>
+            &nbsp; to participate in the rewards program.
+          </Info>
+        )}
+        {!connected && (
+          <Info padding="16" isCompact={isCompact}>
+            Please, connect your wallet to get started
           </Info>
         )}
         {SECTIONS[activeKey].id === 'withdraw' && (
@@ -228,6 +242,7 @@ export default function StakeModule() {
             balanceUni={selectedTokenBalance}
             decimalsUni={decimalsUni}
             isCompact={isCompact}
+            isStake={SECTIONS[activeKey].id === 'stake'}
           />
         )}
         {SECTIONS[activeKey].id === 'stake' && (
@@ -254,11 +269,6 @@ export default function StakeModule() {
         )}
         {SECTIONS[activeKey].id === 'claim' && (
           <ClaimSection isCompact={isCompact} />
-        )}
-        {!connected && (
-          <Info padding="16" isCompact={isCompact}>
-            Please, connect your wallet to get started.
-          </Info>
         )}
         {connected && (
           <ActionButton
@@ -479,13 +489,19 @@ function ClaimSection() {
   )
 }
 
+const StyledLink = styled.a`
+      &,
+      &:hover {
+       color: #C5ABFF;
+      }
+  `
+
 const Card = styled.div`
   width: 100%;
   height: 120px;
-  background: #ffffff;
-  box-shadow: 0px 7px 17px rgba(139, 166, 194, 0.15);
-  border-radius: 8px;
-  padding: 32px;
+  background: #3C3846;
+  border-radius: 4px;
+  padding: 20px;
 `
 
 const ActionButton = styled.button`

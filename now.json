@@ -1,8 +1,8 @@
 {
   "version": 2,
   "public": true,
-  "scope": "aragon",
-  "alias": "liquidity.aragon.org",
+  "scope": "ultra",
+  "alias": "liquidity.ultra.io",
   "github": {
     "silent": true
   },

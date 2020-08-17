@@ -11,18 +11,23 @@ if (env('SENTRY_DSN')) {
   Sentry.init({
     dsn: env('SENTRY_DSN'),
     environment: env('NODE_ENV'),
-    release: 'liquidity.aragon.org@' + env('BUILD'),
+    release: 'liquidity.ultra.io@' + env('BUILD'),
   })
 }
 
 const GlobalStyles = createGlobalStyle`
   @font-face {
-    font-family: 'Manrope';
-    src: url('/fonts/ManropeGX.ttf');
+    font-family: 'Inter';
+    src: url('/fonts/Inter-Regular.ttf');
   }
+  @font-face {
+    font-family: 'Roboto Mono';
+    src: url('/fonts/Robotomono.ttf');
+  }
+ 
   body,
   button {
-    font-family: 'Manrope', sans-serif;
+    font-family: 'Inter', sans-serif;
   }
   body,
   html {
@@ -42,7 +47,7 @@ export default function App({ Component, pageProps }) {
     <ViewportProvider>
       <animated.div style={revealProps}>
         <NextHead>
-          <title>Aragon Liquidity Program</title>
+          <title>Ultra Liquidity Program</title>
         </NextHead>
         <GlobalStyles />
         <WalletProvider>

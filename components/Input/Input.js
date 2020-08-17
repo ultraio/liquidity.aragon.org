@@ -10,7 +10,7 @@ function Input({
   onChange = noop,
   onFocus = noop,
   onMax = noop,
-  placeholder = 'Enter amount',
+  placeholder = 'Enter UNI Amount',
 }) {
   const [opened, setOpened] = useState(false)
   const buttonRef = useRef()
@@ -40,9 +40,8 @@ function Input({
           position: relative;
           z-index: 1;
           width: 100%;
-          height: 50px;
-          margin: 16px 0 20px 0;
-          background: #ffffff;
+          height: 64px;
+          margin: 12px 0 20px 0;
           display: flex;
           padding: 0;
           opacity: ${disabled ? '0.5' : '1'};
@@ -60,16 +59,16 @@ function Input({
             position: absolute;
             z-index: 1;
             width: 100%;
-            height: 69px;
-            padding: 6px 12px 0;
-            background: #ffffff;
-            border: 1px solid #dde4e9;
-            color: #212b36;
+            height: 64px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px 12px 20px 16px;
+            color: rgba(255, 255, 255, 0.2);
             box-sizing: border-box;
-            box-shadow: inset 0px 4px 8px rgba(139, 166, 194, 0.35);
-            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
             appearance: none;
-            font-size: 20px;
+            font-size: 16px;
+            line-height: 24px;
             font-weight: 400;
             &::-webkit-inner-spin-button,
             &::-webkit-outer-spin-button {
@@ -123,7 +122,6 @@ const DropdownButton = React.forwardRef(function DropdownButton(
         color: #212b36;
         background: transparent;
         border-width: 0;
-        border-radius: 0 4px 4px 0;
         outline: 0;
         transition: none;
         cursor: pointer;
@@ -146,6 +144,8 @@ const DropdownButton = React.forwardRef(function DropdownButton(
         onClick={disabled ? undefined : onMax}
         css={`
           position: relative;
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 4px;
           &:active {
             ${disabled ? 'top: 0px' : 'top: 1px'};
           }
@@ -161,7 +161,13 @@ function Adornment() {
   return (
     <div>
       <img src={uniswapSvg} alt="Token Logo" width={36} />
-      <span>MAX</span>
+      <span css={`
+        font-weight: bold;
+        font-size: 12px;
+        line-height: 16px;
+       color: rgba(255, 255, 255, 0.2);
+       `}
+      >Max</span>
     </div>
   )
 }

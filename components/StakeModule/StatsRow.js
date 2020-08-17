@@ -2,7 +2,7 @@ import React from 'react'
 import TokenAmount from 'token-amount'
 import { useWalletAugmented } from 'lib/wallet'
 
-export default function StatsRow({ balanceUni, decimalsUni, isCompact }) {
+export default function StatsRow({ balanceUni, decimalsUni, isCompact, isStake }) {
   const { connected } = useWalletAugmented()
 
   return (
@@ -21,7 +21,7 @@ export default function StatsRow({ balanceUni, decimalsUni, isCompact }) {
     >
       <div
         css={`
-          margin-top: 48px;
+          margin-top: 42px;
           color: #7893ae;
           ${isCompact &&
             `
@@ -31,15 +31,23 @@ export default function StatsRow({ balanceUni, decimalsUni, isCompact }) {
       >
         <span
           css={`
-            color: black;
+            font-weight: 500;
+            font-size: 10px;
+            line-height: 16px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.25);
           `}
         >
-          {' '}
+          {isStake ? 'Amount of UNI to Stake' : ''}
         </span>
       </div>
       <div
         css={`
-          color: #7893ae;
+          color: rgba(255, 255, 255, 0.7);
+          font-size: 12px;
+          line-height: 20px;
+          padding-right: 12px;
           ${isCompact &&
             `
               margin-top: 8px;
@@ -49,7 +57,12 @@ export default function StatsRow({ balanceUni, decimalsUni, isCompact }) {
         Your account’s balance:{' '}
         <span
           css={`
-            color: black;
+            font-family: 'Roboto Mono';
+            font-style: normal;
+            font-weight: normal;
+            font-size: 12px;
+            line-height: 20px;
+            color: #C5ABFF;
           `}
         >
           {' '}

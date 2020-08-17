@@ -1,8 +1,8 @@
 import React from 'react'
 
 const MODES = new Map([
-  ['info', 'rgba(0, 194, 255, 0.1)'],
-  ['warning', 'rgba(247, 149, 1, 0.06)'],
+  ['info', { background: '', color: 'rgba(255, 255, 255, 0.7)' }],
+  ['warning', { background: 'rgba(179, 173, 255, 0.1)', color: '#C5ABFF'}],
 ])
 
 export default function Info({
@@ -20,9 +20,10 @@ export default function Info({
         align-items: center;
         width: 100%;
         border-radius: 6px;
-        background: ${modeColor};
+        background: ${modeColor.background};
+        color: ${modeColor.color};
         font-size: 16px;
-        margin-top: 24px;
+        margin-top: 40px;
         padding: ${padding}px;
         height: 100%;
         font-weight: 300;

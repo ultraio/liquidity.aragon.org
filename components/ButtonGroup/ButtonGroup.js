@@ -57,8 +57,8 @@ function Button({
     <ButtonBase
       onClick={setSelected}
       css={`
-        ${disabled ? 'background: #F6F9FC;' : ''}
-        ${selected ? 'border: 2px solid #00c2ff;' : 'border: 0;'}
+        ${disabled ? 'color: rgba(255,255,255,0.4);' : ''}
+        ${selected ? 'border-bottom: 2px solid #A481F0; opacity: 1;' : 'border: 0;'}
         ${lastChild ? 'margin-right: 0px;' : ''}
       `}
     >
@@ -69,18 +69,23 @@ function Button({
 
 const ButtonBase = styled.button`
   position: relative;
-  background: #ffffff;
-  box-shadow: 0px 3px 6px rgba(139, 166, 194, 0.35);
+  background: transparent;
+  color: #ffffff;
+  opacity: 0.7;
+  font-weight: bold;
+  box-shadow: none;
   border: 0;
-  border-radius: 8px;
-  padding: 0;
+  padding: 24px 40px;
   margin-right: 6px;
-  width: 227px;
-  height: 59px;
+  height: 72px;
   cursor: pointer;
   transition: all 0.1s ease-out;
   &:active {
     top: 1px;
-    border: 2px solid #00c2ff;
+    border-bottom: 2px solid #A481F0;
+    opacity: 1;
+  }
+  &:focus {
+    outline: none;
   }
 `

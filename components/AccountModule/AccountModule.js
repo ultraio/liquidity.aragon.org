@@ -138,7 +138,7 @@ function DisconnectedMode() {
             background: transparent;
           `}
         >
-          Connect Account
+          Connect Wallet
         </div>
       </OverlayTrigger>
     </ButtonBase>
