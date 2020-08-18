@@ -184,7 +184,7 @@ const DropdownButton = React.forwardRef(function DropdownButton(
           right: 0;
           margin-right: 12px;
           &:active {
-            ${disabled ? 'top: 0px' : 'top: 1px'};
+            ${disabled ? 'top: 0px' : ''};
           }
           &:hover {
             ${disabled ? '' : 'background: rgba(255, 255, 255, 0.2)'};

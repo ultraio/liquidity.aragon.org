@@ -11,6 +11,7 @@ export default function StatsRow({ balanceUni, decimalsUni, isCompact, isStake }
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
+        ${isStake ? '' : 'padding-top: 16px;'}
         ${isCompact &&
           `
             flex-direction: column;

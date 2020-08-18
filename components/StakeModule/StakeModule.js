@@ -212,7 +212,7 @@ export default function StakeModule() {
           <div css={`
               position: absolute;
               right: 20px;
-              top: 16px;
+              top: 20px;
            `}>
             <AccountModule  />
           </div>
@@ -240,19 +240,19 @@ export default function StakeModule() {
             </p>
           </Info>
         )}
-        {!connected && (
-          <Info padding="16" isCompact={isCompact}>
-            Please, connect your wallet to get started
-          </Info>
-        )}
         {SECTIONS[activeKey].id === 'withdraw' && (
-          <Info mode="info" padding="16" Compact={isCompact}>
+          <Info mode="info" padding="0" Compact={isCompact}>
             Withdraw all of your staked UNI.
           </Info>
         )}
         {SECTIONS[activeKey].id === 'claim' && (
-          <Info mode="info" padding="16" Compact={isCompact}>
+          <Info mode="info" padding="0" Compact={isCompact}>
             Claim all of your rewards from your staked UNI.
+          </Info>
+        )}
+        {!connected && (
+          <Info padding="16" isCompact={isCompact}>
+            Please, connect your wallet to get started
           </Info>
         )}
         {SECTIONS[activeKey].id !== 'claim' && (
@@ -277,8 +277,6 @@ export default function StakeModule() {
             disabled={disabled || inputError}
             onClick={disabled ? undefined : handleSubmit}
             css={`
-              background: #A481F0;
-              color: #ffffff;
               ${disabled ||
               (inputError &&
               `
@@ -289,6 +287,11 @@ export default function StakeModule() {
                   top: 0px;
                 }
               `)}
+               ${disabled ? '': `
+                 &:hover {
+                    background: #AD8EF2;
+                  }
+               `}
             `}
           >
             {SECTIONS[activeKey].copy}
@@ -318,13 +321,13 @@ export default function StakeModule() {
         {SECTIONS[activeKey].id === 'claim' && (
           <ClaimSection isCompact={isCompact} />
         )}
-        {connected && SECTIONS[activeKey].id !== 'stake' && (
+        {SECTIONS[activeKey].id !== 'stake' && (
           <ActionButton
             type="button"
             disabled={disabled || inputError}
             onClick={disabled ? undefined : handleSubmit}
             css={`
-              margin-top: 60px;
+              margin-top: 20px;
               ${disabled ||
                 (inputError &&
                   `
@@ -335,6 +338,11 @@ export default function StakeModule() {
                   top: 0px;
                 }
               `)}
+               ${disabled ? '': `
+                 &:hover {
+                    background: #AD8EF2;
+                  }
+               `}
             `}
           >
             {SECTIONS[activeKey].copy}
@@ -404,7 +412,7 @@ function WithdrawSection({ loading, isCompact, staked }) {
     <div
       css={`
         display: flex;
-        margin-top: 20px;
+        margin-top: 12px;
         ${isCompact &&
           `
           flex-direction: column;
@@ -413,36 +421,47 @@ function WithdrawSection({ loading, isCompact, staked }) {
     >
       <Card
         css={`
+        display: flex;
+        align-items: center;
+      `}
+      >
+        <Logo mode={'uni'} />
+        <div
+          css={`
           display: flex;
           flex-direction: column;
-          margin: 0 9px 0 0;
-          ${isCompact &&
-            `
-            margin: 0 0 9px 0;
-          `}
+          margin-left: 20px;
         `}
-      >
+        >
         <span
           css={`
             display: block;
-            color: #7893ae;
             font-weight: 300;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 10px;
           `}
         >
-          Amount available to withdraw
+          Amount available to withdraw:
         </span>
-        <span
-          css={`
+          <span
+            css={`
+            font-family: Roboto Mono;
+            font-size: 28px;
+            line-height: 36px;
+            color: #FFFFFF;
             display: block;
-            font-size: 24px;
           `}
-        >
+          >
           {!connected
-            ? '0'
+            ? '0 UNI'
             : loading
-            ? 'Loading...'
-            : TokenAmount.format(staked, 18, { symbol: 'UNI', digits: 9 })}
+              ? 'loading...'
+              : TokenAmount.format(staked, 18, {
+                symbol: 'UNI',
+                digits: 9,
+              })}
         </span>
+        </div>
       </Card>
     </div>
   )
@@ -557,13 +576,12 @@ const ActionButton = styled.button`
   width: 100%;
   height: 44px;
   cursor: pointer;
-  &:active {
-    top: 1px;
-  }
-  background: linear-gradient(342.22deg, #01e8f7 -5.08%, #00c2ff 81.4%);
-  color: white;
+  background: #A481F0;
+  color: #ffffff;
   font-weight: bold;
   mix-blend-mode: normal;
   box-shadow: 0px 2px 2px rgba(87, 95, 119, 0.15);
-  border-radius: 6px;
+  &:active {
+    top: 1px;
+  }
 `

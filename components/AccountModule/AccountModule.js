@@ -233,6 +233,7 @@ function ConnectedMode() {
       <ButtonBase
         onClick={deactivate}
         css={`
+          display: flex;
           background: rgba(255, 255, 255, 0.1);
           margin-left: 8px;
           padding: 9px;
@@ -251,8 +252,9 @@ function ConnectedMode() {
 
 const Container = styled.div`
   display: flex;
-  height: 40px;
+  height: 32px;
 `
+
 const StyledPopover = styled(Popover)`
   top: 8px !important;
   overflow: hidden;
