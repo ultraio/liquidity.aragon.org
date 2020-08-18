@@ -39,7 +39,7 @@ function Logo({
   const modeTransition = useTransition(mode, null, {
     immediate: !animate.current,
     from: { opacity: 0 },
-    enter: { opacity: 1 },
+    enter: { opacity: 0.5 },
     leave: { opacity: 0 },
     config: {
       mass: 0.1,
@@ -54,14 +54,16 @@ function Logo({
       css={`
         position: relative;
         display: flex;
-        width: 68px;
-        height: 68px;
+        width: 64px;
+        height: 64px;
         padding: 0;
         white-space: nowrap;
         border: 0;
         cursor: pointer;
         outline: 0 !important;
-        background: transparent;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 50%;
+        overflow: hidden;
         &::-moz-focus-inner {
           border: 0;
         }
@@ -86,6 +88,7 @@ function Logo({
             top: 0;
             left: 0;
             width: 100%;
+            height: 100%;
           `}
         />
       ))}

@@ -167,7 +167,6 @@ export default function StakeModule() {
   return (
     <div
       css={`
-        min-width: 880px;
         min-height: 492px;
         margin: 0 auto;
       `}
@@ -177,24 +176,29 @@ export default function StakeModule() {
           display: flex;
           flex-direction: column;
           justify-content: center;
+          min-width: 880px;
+          max-width: 100%;
           width: 100%;
           height: 100%;
           background: #312D36;
           mix-blend-mode: normal;
-          box-shadow: 0px 2px 2px rgba(87, 95, 119, 0.15);
-          border-radius: 6px;
-          padding: 20px;
+          padding: 0 20px 20px;
+          border: 1px solid #3C3846;
+          box-shadow: 0 20px 80px rgba(0, 0, 0, 0.25), 0 24px 38px rgba(0, 0, 0, 0.14), 0 9px 46px rgba(0, 0, 0, 0.12);
+          border-radius: 8px;
           ${isCompact &&
             `
             max-width: 362px;
             max-height: 100%;
             padding: 10px;
             justify-content: flex-start;
+            overflow: hidden;
           `}
         `}
       >
         <div css={`
-            margin: 0 -16px;
+            position: relative;
+            margin: 0 -20px;
             background: #3C3846;
             border-bottom: 1px solid #55525F;
         `}>
@@ -205,21 +209,35 @@ export default function StakeModule() {
             isCompact={isCompact}
             onSetActiveKey={setActiveKey}
           />
-         {/* <AccountModule />*/}
+          <div css={`
+              position: absolute;
+              right: 20px;
+              top: 16px;
+           `}>
+            <AccountModule  />
+          </div>
         </div>
 
         {SECTIONS[activeKey].id === 'stake' && (
           <Info mode="info" height="40" padding="0" Compact={isCompact}>
-            Learn&nbsp;
-            <StyledLink
-              rel="noopener noreferrer"
-              target="_blank"
-              href="https://aragon.org/blog/liquidity-rewards"
-            >
-              {' '}
-              how to obtain UNI
-            </StyledLink>
-            &nbsp; to participate in the rewards program.
+            <p css={`margin-bottom: 0;`}>
+              <span>Learn </span>
+              <a
+                rel="noopener noreferrer"
+                target="_blank"
+                href="https://aragon.org/blog/liquidity-rewards"
+                css={`
+                    &,
+                    &:hover {
+                     color: #C5ABFF;
+                    }
+                `}
+              >
+                {' '}
+                how to obtain UNI
+              </a>
+              <span> to participate in the rewards program.</span>
+            </p>
           </Info>
         )}
         {!connected && (
@@ -254,6 +272,36 @@ export default function StakeModule() {
           />
         )}
         {SECTIONS[activeKey].id === 'stake' && (
+          <ActionButton
+            type="button"
+            disabled={disabled || inputError}
+            onClick={disabled ? undefined : handleSubmit}
+            css={`
+              background: #A481F0;
+              color: #ffffff;
+              ${disabled ||
+              (inputError &&
+              `
+                background: #534471;
+                color: rgba(255, 255, 255, 0.2);
+                cursor: default;
+                &:active {
+                  top: 0px;
+                }
+              `)}
+            `}
+          >
+            {SECTIONS[activeKey].copy}
+          </ActionButton>
+        )}
+        {SECTIONS[activeKey].id === 'stake' && (
+          <div css={
+            `background: #55525F;
+            height: 1px;
+            margin-top: 20px;
+          `} />
+        )}
+        {SECTIONS[activeKey].id === 'stake' && (
           <StakeSection
             loading={loadingStaked}
             isCompact={isCompact}
@@ -270,7 +318,7 @@ export default function StakeModule() {
         {SECTIONS[activeKey].id === 'claim' && (
           <ClaimSection isCompact={isCompact} />
         )}
-        {connected && (
+        {connected && SECTIONS[activeKey].id !== 'stake' && (
           <ActionButton
             type="button"
             disabled={disabled || inputError}
@@ -280,8 +328,8 @@ export default function StakeModule() {
               ${disabled ||
                 (inputError &&
                   `
-                background: #F6F9FC;
-                color: #8398AC;
+                background: #534471;
+                color: rgba(255, 255, 255, 0.2);
                 cursor: default;
                 &:active {
                   top: 0px;
@@ -320,19 +368,23 @@ function StakeSection({ loading, staked }) {
           css={`
             display: block;
             font-weight: 300;
-            color: #7893ae;
-            margin-bottom: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 10px;
           `}
         >
           Amount of UNI staked
         </span>
         <span
           css={`
+            font-family: Roboto Mono;
+            font-size: 28px;
+            line-height: 36px;
+            color: #FFFFFF;
             display: block;
           `}
         >
           {!connected
-            ? '0'
+            ? '0 UNI'
             : loading
             ? 'loading...'
             : TokenAmount.format(staked, 18, {
@@ -489,34 +541,28 @@ function ClaimSection() {
   )
 }
 
-const StyledLink = styled.a`
-      &,
-      &:hover {
-       color: #C5ABFF;
-      }
-  `
-
 const Card = styled.div`
   width: 100%;
-  height: 120px;
+  height: 104px;
   background: #3C3846;
   border-radius: 4px;
-  padding: 20px;
+  padding: 20px 24px;
 `
 
 const ActionButton = styled.button`
   position: relative;
   border: 0;
-  border-radius: 8px;
+  border-radius: 4px;
   padding: 0;
   width: 100%;
-  height: 48px;
+  height: 44px;
   cursor: pointer;
   &:active {
     top: 1px;
   }
   background: linear-gradient(342.22deg, #01e8f7 -5.08%, #00c2ff 81.4%);
   color: white;
+  font-weight: bold;
   mix-blend-mode: normal;
   box-shadow: 0px 2px 2px rgba(87, 95, 119, 0.15);
   border-radius: 6px;

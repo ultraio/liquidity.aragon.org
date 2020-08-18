@@ -44,7 +44,7 @@ function Input({
           margin: 12px 0 20px 0;
           display: flex;
           padding: 0;
-          opacity: ${disabled ? '0.5' : '1'};
+          opacity: 1;
         `}
       >
         <input
@@ -75,13 +75,48 @@ function Input({
               -webkit-appearance: none;
             }
             -moz-appearance: textfield;
+            ${!disabled ? `
+            &:hover {
+              border: 1px solid rgba(255, 255, 255, 0.5);
+              &:focus {
+                border-color: #A481F0;
+              }
+              &::placeholder {
+                color: #ffffff;
+                opacity: 0.5;
+              }
+            }` : ''}
+            ${inputValue ? `
+              outline: none;
+              font-family: 'Roboto Mono';
+              font-style: normal;
+              font-weight: normal;
+              font-size: 28px;
+              line-height: 36px;
+              color: #ffffff;
+              border-color: #A481F0;
+              caret-color: #A481F0;
+               &::placeholder {
+                visibility: hidden;
+               }
+            `: ''}
             &:focus {
               outline: none;
-              border-color: #08bee5;
+              font-family: 'Roboto Mono';
+              font-style: normal;
+              font-weight: normal;
+              font-size: 28px;
+              line-height: 36px;
+              color: #ffffff;
+              border-color: #A481F0;
+              caret-color: #A481F0;
+               &::placeholder {
+                visibility: hidden;
+               }
             }
             &::placeholder {
-              color: #8fa4b5;
-              opacity: 1;
+              color: #ffffff;
+              opacity: 0.2;
             }
             &:invalid {
               box-shadow: none;
@@ -116,7 +151,7 @@ const DropdownButton = React.forwardRef(function DropdownButton(
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 69px;
+        height: 64px;
         width: 150px;
         padding: 0 0 0 10px;
         color: #212b36;
@@ -143,29 +178,40 @@ const DropdownButton = React.forwardRef(function DropdownButton(
       <div
         onClick={disabled ? undefined : onMax}
         css={`
-          position: relative;
           background: rgba(255, 255, 255, 0.1);
           border-radius: 4px;
+          position: absolute;
+          right: 0;
+          margin-right: 12px;
           &:active {
             ${disabled ? 'top: 0px' : 'top: 1px'};
           }
+          &:hover {
+            ${disabled ? '' : 'background: rgba(255, 255, 255, 0.2)'};
+          }
         `}
       >
-        <Adornment />
+        <Adornment disabled={disabled} />
       </div>
     </button>
   )
 })
 
-function Adornment() {
+function Adornment({ disabled}) {
   return (
-    <div>
-      <img src={uniswapSvg} alt="Token Logo" width={36} />
+    <div
+      css={`
+        padding: 8px 11.225px;
+        opacity: ${disabled ? '0.2' : '1'};
+      `}
+    >
+      <img src={uniswapSvg} alt="Token Logo" width={20.4} css={`margin-top: -3px;`} />
       <span css={`
         font-weight: bold;
         font-size: 12px;
         line-height: 16px;
-       color: rgba(255, 255, 255, 0.2);
+        color: #ffffff;
+        padding-left: 10px;
        `}
       >Max</span>
     </div>

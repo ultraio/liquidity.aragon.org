@@ -39,7 +39,7 @@ export default function StatsRow({ balanceUni, decimalsUni, isCompact, isStake }
             color: rgba(255, 255, 255, 0.25);
           `}
         >
-          {isStake ? 'Amount of UNI to Stake' : ''}
+          {isStake ? 'Amount of UNI to Stake:' : ''}
         </span>
       </div>
       <div
@@ -47,14 +47,13 @@ export default function StatsRow({ balanceUni, decimalsUni, isCompact, isStake }
           color: rgba(255, 255, 255, 0.7);
           font-size: 12px;
           line-height: 20px;
-          padding-right: 12px;
           ${isCompact &&
             `
               margin-top: 8px;
             `}
         `}
       >
-        Your account’s balance:{' '}
+        Your account’s balance: {' '}
         <span
           css={`
             font-family: 'Roboto Mono';
@@ -63,6 +62,7 @@ export default function StatsRow({ balanceUni, decimalsUni, isCompact, isStake }
             font-size: 12px;
             line-height: 20px;
             color: #C5ABFF;
+            padding-left: 12px;
           `}
         >
           {' '}

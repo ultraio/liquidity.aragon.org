@@ -2,7 +2,6 @@ import React, { useCallback, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { OverlayTrigger, Popover } from 'react-bootstrap'
 import styled from 'styled-components'
-import EthIdenticon from 'components/EthIdenticon/EthIdenticon'
 import { trackEvent } from 'lib/analytics'
 import { useWalletAugmented } from 'lib/wallet'
 import { shortenAddress } from 'lib/web3-utils'
@@ -11,6 +10,7 @@ import fortmatic from './provider-icons/fortmatic.svg'
 import frame from './provider-icons/frame.svg'
 import metamask from './provider-icons/metamask.svg'
 import portis from './provider-icons/portis.svg'
+import logout from './assets/log-out.svg'
 
 function AccountModule() {
   const { account } = useWalletAugmented()
@@ -45,102 +45,108 @@ function DisconnectedMode() {
       ref={containerRef}
       css={`
         position: relative;
-        width: 164px;
-        height: 48px;
-        background: linear-gradient(306.16deg, #01e8f7 -5.08%, #00c2ff 81.4%);
-        mix-blend-mode: normal;
-        box-shadow: 0px 2px 2px rgba(87, 95, 119, 0.15);
-        border-radius: 6px;
+        width: 136px;
+        height: 32px;
+        background: #A481F0;
+        border-radius: 4px;
         margin-left: 0;
         color: white;
         &:active {
           top: 1px;
         }
+        &:focus,
+        &:hover {
+          outline: none;
+          background: #AD8EF2;
+          box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.14), 0px 3px 14px rgba(0, 0, 0, 0.12), 0px 4px 5px rgba(0, 0, 0, 0.2);
+        }
       `}
     >
       <OverlayTrigger
-        trigger="click"
-        rootClose
-        placement="bottom-end"
-        overlay={
-          <StyledPopover
-            css={`
+          trigger="click"
+          rootClose
+          placement="bottom-end"
+          overlay={
+            <StyledPopover
+              css={`
               position: absolute;
               left: 0;
             `}
-          >
-            <div
-              css={`
+            >
+              <div
+                css={`
                 position: relative;
                 width: 100%;
                 height: 40px;
-                border-bottom: 0.5px solid #dde4e8;
-                color: #7893ae;
+                color: #ffffff;
               `}
-            >
+              >
               <span
                 css={`
                   display: block;
                   width: 100%;
-                  padding-top: 8px;
-                  padding-left: 16px;
+                  padding-top: 24px;
+                  padding-left: 24px;
                   font-size: 16px;
-                  font-family: 'Manrope', helvetica;
-                  font-weight: 300;
+                  line-height: 24px;
+                  font-family: 'Inter', sans-serif;
+                  font-weight: bold;
                 `}
               >
-                Use Account From
+                Use Account From:
               </span>
-              <div
-                css={`
+                <div
+                  css={`
                   display: grid;
-                  grid-gap: 10px;
+                  grid-gap: 12px;
                   grid-auto-flow: row;
                   grid-template-columns: repeat(2, 1fr);
-                  padding: 16px;
+                  padding: 16px 24px;
                 `}
-              >
-                <ProviderButton
-                  name="Metamask"
-                  onActivate={() => activateAndTrack('injected')}
-                  image={metamask}
-                />
-                <ProviderButton
-                  name="Frame"
-                  onActivate={() => activateAndTrack('frame')}
-                  image={frame}
-                />
-                <ProviderButton
-                  name="Fortmatic"
-                  onActivate={() => activateAndTrack('fortmatic')}
-                  image={fortmatic}
-                />
-                <ProviderButton
-                  name="Portis"
-                  onActivate={() => activateAndTrack('portis')}
-                  image={portis}
-                />
+                >
+                  <ProviderButton
+                    name="Metamask"
+                    onActivate={() => activateAndTrack('injected')}
+                    image={metamask}
+                  />
+                  <ProviderButton
+                    name="Frame"
+                    onActivate={() => activateAndTrack('frame')}
+                    image={frame}
+                  />
+                  <ProviderButton
+                    name="Fortmatic"
+                    onActivate={() => activateAndTrack('fortmatic')}
+                    image={fortmatic}
+                  />
+                  <ProviderButton
+                    name="Portis"
+                    onActivate={() => activateAndTrack('portis')}
+                    image={portis}
+                  />
+                </div>
               </div>
-            </div>
-          </StyledPopover>
-        }
-      >
-        <div
-          css={`
+            </StyledPopover>
+          }
+        >
+          <div
+            css={`
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 16px;
+            font-family: Inter;
+            font-size: 12px;
+            line-height: 16px;
             font-weight: bold;
             margin: 0;
             width: 100%;
             height: 100%;
             background: transparent;
           `}
-        >
-          Connect Wallet
-        </div>
-      </OverlayTrigger>
+          >
+            Connect Wallet
+          </div>
+        </OverlayTrigger>
     </ButtonBase>
   )
 }
@@ -153,27 +159,36 @@ function ProviderButton({ name, onActivate, image }) {
         position: relative;
         display: flex;
         flex-direction: column;
-        color: #1c1c1c;
+        background: #3C3846;
+        color: rgba(255, 255, 255, 0.5);
         align-items: center;
         justify-content: center;
         width: 100%;
         height: 90px;
-        margin-bottom: 12px;
-        box-shadow: 0px 5px 12px rgba(139, 166, 194, 0.35);
-        border-radius: 8px;
+        border-radius: 4px;
         text-transform: capitalize;
         &:active {
           top: 1px;
-          box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        &:active,
+        &:hover {
+          background: #AD8EF2;
+          color: #ffffff;
+        }
+        &:active,
+        &:hover,
+        &:focus {
+          outline: none;
         }
       `}
     >
-      <img src={image} alt="" height="42px" />
+      <img src={image} alt="" height="32px" css={`margin-top: 5.23px;`} />
       <div
         css={`
-          font-family: 'Manrope', helvetica !important;
-          font-size 16px;
-          margin-top: 8px;
+          font-family: 'Inter', sans-serif !important;
+          font-size: 12px;
+          line-height: 20px;
+          margin-top: 13px;
         `}
       >
         {name}
@@ -195,30 +210,41 @@ function ConnectedMode() {
   return (
     <Container ref={containerRef}>
       <ButtonBase
-        onClick={deactivate}
         css={`
+          background: rgba(255, 255, 255, 0.1);
+          box-shadow: none;
           display: flex;
           flex-direction: row;
           position: relative;
           align-items: center;
           justify-content: center;
-          font-weight: normal;
-          width: 178px;
+          cursor: default;
           &:active {
             top: 1px;
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+          }
+          &:active,
+          &:focus {
+            outline: none;
           }
         `}
       >
-        <div
-          css={`
-            position: relative;
-          `}
-        >
-          <EthIdenticon address={account} scale={1} radius={4} />
-        </div>
         <Address>{shortenAddress(account)}</Address>
       </ButtonBase>
+      <ButtonBase
+        onClick={deactivate}
+        css={`
+          background: rgba(255, 255, 255, 0.1);
+          margin-left: 8px;
+          padding: 9px;
+          &:active,
+          &:focus {
+            outline: none;
+          }
+        `}
+      >
+        <img src={logout} alt="Log out" height="16px" />
+      </ButtonBase>
+
     </Container>
   )
 }
@@ -228,12 +254,12 @@ const Container = styled.div`
   height: 40px;
 `
 const StyledPopover = styled(Popover)`
+  top: 8px !important;
   overflow: hidden;
-  background: #fff;
-  box-shadow: 0px 7px 17px rgba(139, 166, 194, 0.35);
-  border: 0 solid transparent;
-  border-radius: 8px;
-  width: 410px;
+  background: #232026;
+  border: 1px solid #45424A;
+  border-radius: 4px;
+  width: 388px;
   max-width: 90vw;
   height: 277px;
   right: 100px;
@@ -277,12 +303,12 @@ const StyledPopover = styled(Popover)`
 `
 
 const Address = styled.div`
-  font-size: 18px;
-  line-height: 31px;
-  color: #1c1c1c;
-  padding-left: 8px;
-  padding-right: 4px;
-  font-family: monospace;
+  font-family: 'Roboto Mono';
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: normal;
+  color: #FFFFFF;
+  padding: 8px 16px;
 `
 
 const ButtonBase = styled.button`
