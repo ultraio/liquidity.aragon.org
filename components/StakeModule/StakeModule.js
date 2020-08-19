@@ -175,8 +175,9 @@ export default function StakeModule() {
         css={`
           display: flex;
           flex-direction: column;
-          justify-content: center;
+          justify-content: flex-start;
           min-width: 880px;
+          min-height: 609px;
           max-width: 100%;
           width: 100%;
           height: 100%;

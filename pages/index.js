@@ -17,7 +17,7 @@ export default () => {
       css={`
         position: relative;
         min-height: 100vh;
-        background: #312D36;
+        background: transparent;
         display: flex;
         flex-direction: column;
         align-items: center;
