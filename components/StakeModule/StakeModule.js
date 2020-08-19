@@ -287,7 +287,7 @@ export default function StakeModule() {
                   top: 0px;
                 }
               `)}
-               ${disabled ? '': `
+               ${disabled || !connected ? '': `
                  &:hover {
                     background: #AD8EF2;
                   }
@@ -319,7 +319,7 @@ export default function StakeModule() {
           />
         )}
         {SECTIONS[activeKey].id === 'claim' && (
-          <ClaimSection isCompact={isCompact} />
+          <ClaimSectionReward isCompact={isCompact} />
         )}
         {SECTIONS[activeKey].id !== 'stake' && (
           <ActionButton
@@ -338,7 +338,7 @@ export default function StakeModule() {
                   top: 0px;
                 }
               `)}
-               ${disabled ? '': `
+                ${disabled || !connected ? '': `
                  &:hover {
                     background: #AD8EF2;
                   }
@@ -347,6 +347,9 @@ export default function StakeModule() {
           >
             {SECTIONS[activeKey].copy}
           </ActionButton>
+        )}
+        {SECTIONS[activeKey].id === 'claim' && (
+          <ClaimSectionLiquidityPool isCompact={isCompact} />
         )}
       </main>
     </div>
@@ -467,10 +470,9 @@ function WithdrawSection({ loading, isCompact, staked }) {
   )
 }
 
-function ClaimSection() {
+function ClaimSectionReward() {
   const { account } = useWalletAugmented()
   const { loading, paid } = useRewardsPaid(account)
-  const [loadingUniswapInfo, uniswapInfo] = useTokenUniswapInfo('ANT')
 
   return (
     <div>
@@ -478,10 +480,10 @@ function ClaimSection() {
         css={`
           display: flex;
           align-items: center;
-          margin-top: 20px;
+          margin-top: 40px;
         `}
       >
-        <Logo mode="ant" />
+        <Logo mode="uos" opacity={1} />
         <div
           css={`
             display: flex;
@@ -493,50 +495,11 @@ function ClaimSection() {
             css={`
               display: block;
               font-weight: 300;
-              color: #7893ae;
-              margin-bottom: 12px;
+              color: rgba(255, 255, 255, 0.5);
+              margin-bottom: 10px;
             `}
           >
-            Total ANT in the Uniswap liquidity pool
-          </span>
-          <span
-            css={`
-              display: block;
-              font-size: 22px;
-            `}
-          >
-            {loadingUniswapInfo || !uniswapInfo
-              ? 'loading...'
-              : Number(uniswapInfo?.token0?.totalLiquidity)?.toLocaleString(
-                  'en-US'
-                ) ?? '0'}{' '}
-          </span>
-        </div>
-      </Card>
-      <Card
-        css={`
-          display: flex;
-          align-items: center;
-          margin-top: 20px;
-        `}
-      >
-        <Logo mode="ant" />
-        <div
-          css={`
-            display: flex;
-            flex-direction: column;
-            margin-left: 20px;
-          `}
-        >
-          <span
-            css={`
-              display: block;
-              font-weight: 300;
-              color: #7893ae;
-              margin-bottom: 12px;
-            `}
-          >
-            Rewards available to withdraw
+            Rewards
           </span>
           <span
             css={`
@@ -545,14 +508,73 @@ function ClaimSection() {
           >
             <span
               css={`
-                color: #3ad8c5;
-                font-size: 22px;
+                font-family: Roboto Mono;
+                font-size: 28px;
+                line-height: 36px;
+                color: #FFFFFF;
+                display: block;
               `}
             >
               {loading
                 ? 'loading...'
-                : TokenAmount.format(paid, 18, { symbol: 'ANT' })}
+                : TokenAmount.format(paid, 18, { symbol: 'UOS' })}
             </span>
+          </span>
+        </div>
+      </Card>
+    </div>
+  )
+}
+
+function ClaimSectionLiquidityPool() {
+  const [loadingUniswapInfo, uniswapInfo] = useTokenUniswapInfo('ANT')
+
+  return (
+    <div>
+      <div css={`
+        background: #55525F;
+        height: 1px;
+        margin-top: 20px;
+      `} />
+      <Card
+        css={`
+          display: flex;
+          align-items: center;
+          margin-top: 20px;
+        `}
+      >
+        <Logo mode="uos" />
+        <div
+          css={`
+            display: flex;
+            flex-direction: column;
+            margin-left: 20px;
+          `}
+        >
+          <span
+            css={`
+              display: block;
+              font-weight: 300;
+              color: rgba(255, 255, 255, 0.5);
+              margin-bottom: 10px;
+            `}
+          >
+            Total UOS in the Uniswap liquidity pool
+          </span>
+          <span
+            css={`
+              font-family: Roboto Mono;
+              font-size: 28px;
+              line-height: 36px;
+              color: #FFFFFF;
+              display: block;
+            `}
+          >
+            {loadingUniswapInfo || !uniswapInfo
+              ? 'loading...'
+              : Number(uniswapInfo?.token0?.totalLiquidity)?.toLocaleString(
+              'en-US'
+              ) + ' UOS' ?? '0 UOS'}{' '}
           </span>
         </div>
       </Card>

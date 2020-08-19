@@ -24,6 +24,10 @@ function getImage(mode) {
   return logo
 }
 
+function getOpacity(mode) {
+  return { opacity: mode === 'uos' ? 1 : 0.5 }
+}
+
 function Logo({
   label = 'Ultra Liquidity Rewards',
   onClick = () => {},
@@ -77,12 +81,12 @@ function Logo({
         `}
       `}
     >
-      {modeTransition.map(({ item: mode, key, props: { opacity } }) => (
+      {modeTransition.map(({ item: mode, key }) => (
         <animated.img
           key={key}
           alt={label}
           src={getImage(mode)}
-          style={{ opacity }}
+          style={getOpacity(mode)}
           css={`
             position: absolute;
             top: 0;
