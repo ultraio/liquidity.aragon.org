@@ -72,7 +72,7 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "ANT",
+    "name": "UOS",
     "outputs": [
       { "internalType": "contract IERC20", "name": "", "type": "address" }
     ],

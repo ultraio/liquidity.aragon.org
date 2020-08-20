@@ -528,7 +528,7 @@ function ClaimSectionReward() {
 }
 
 function ClaimSectionLiquidityPool() {
-  const [loadingUniswapInfo, uniswapInfo] = useTokenUniswapInfo('ANT')
+  const [loadingUniswapInfo, uniswapInfo] = useTokenUniswapInfo('UOS')
 
   return (
     <div>
@@ -573,7 +573,7 @@ function ClaimSectionLiquidityPool() {
           >
             {loadingUniswapInfo || !uniswapInfo
               ? 'loading...'
-              : Number(uniswapInfo?.token0?.totalLiquidity)?.toLocaleString(
+              : Number(uniswapInfo?.token1?.totalLiquidity ? uniswapInfo?.token1?.totalLiquidity : 0)?.toLocaleString(
               'en-US'
               ) + ' UOS' ?? '0 UOS'}{' '}
           </span>
