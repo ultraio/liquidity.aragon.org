@@ -24,7 +24,7 @@ stages:
   script:
     - yarn
     - yarn run build
-    - ls -la
+    - yarn run export
   artifacts:
     expire_in: 1 day
     paths:
