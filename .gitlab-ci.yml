@@ -24,10 +24,11 @@ stages:
   script:
     - yarn
     - yarn run build
+    - ls -la
   artifacts:
     expire_in: 1 day
     paths:
-      - dist
+      - build
       - Dockerfile
       - .devops
   cache:
