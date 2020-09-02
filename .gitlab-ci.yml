@@ -28,7 +28,7 @@ stages:
   artifacts:
     expire_in: 1 day
     paths:
-      - build
+      - dist
       - Dockerfile
       - .devops
   cache:
