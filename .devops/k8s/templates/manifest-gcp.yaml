@@ -32,10 +32,6 @@ spec:
       labels:
         app.kubernetes.io/name: ${APP_NAME}-deployment
     spec:
-      hostAliases:
-        - ip: '${ULTRA_IP}'
-          hostnames:
-            - '${BACKEND_URL}'
       containers:
         - name: ${APP_NAME}
           resources:
