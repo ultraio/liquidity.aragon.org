@@ -116,7 +116,6 @@ deploy-staging:
   stage: deploy
   variables:
     APP_NAME: $CI_PROJECT_NAME
-    BACKEND_URL: $STG_BACKEND_URL
     CI_COMMIT_REF_NAME: staging
     CPU_LIMIT: 1
     CPU_REQUEST: 200m
@@ -129,12 +128,12 @@ deploy-staging:
     MEMORY_LIMIT: 1Gi
     MEMORY_REQUEST: 150Mi
     REPLICAS: 2
-    ULTRA_IP: $STG_ULTRA_IP
   environment:
     name: staging
     url: $STG_FRONTEND_URL
   only:
     - master
+    - feature/liquidity-ultra-uos
 
 deploy-production:
   extends:
@@ -142,7 +141,6 @@ deploy-production:
   stage: deploy
   variables:
     APP_NAME: $CI_PROJECT_NAME
-    BACKEND_URL: $PROD_BACKEND_URL
     CPU_LIMIT: 1
     CPU_REQUEST: 200m
     ENCODED_GCP_KEY: $PROD_ENCODED_GCP_KEY
@@ -156,7 +154,6 @@ deploy-production:
     MEMORY_LIMIT: 1Gi
     MEMORY_REQUEST: 150Mi
     REPLICAS: 2
-    ULTRA_IP: $PROD_ULTRA_IP
   environment:
     name: production
     url: $PROD_FRONTEND_URL

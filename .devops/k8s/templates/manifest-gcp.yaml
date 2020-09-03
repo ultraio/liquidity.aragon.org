@@ -76,15 +76,7 @@ spec:
             backend:
               serviceName: ${APP_NAME}-svc
               servicePort: http
-    - host: www.${FRONTEND_URL}
-      http:
-        paths:
-          - path: /
-            backend:
-              serviceName: ${APP_NAME}-svc
-              servicePort: http
   tls:
     - hosts:
       - ${FRONTEND_URL}
-      - www.${FRONTEND_URL}
-      secretName: ${KUBE_ENV}-front-ultra-io-website-cert
+      secretName: ${KUBE_ENV}-liquidity-ultra-io-cert
