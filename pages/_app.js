@@ -47,7 +47,7 @@ export default function App({ Component, pageProps }) {
     <ViewportProvider>
       <animated.div style={revealProps}>
         <NextHead>
-          <title>Ultra Liquidity Program</title>
+          <title>Uniswap Staking Program</title>
         </NextHead>
         <GlobalStyles />
         <WalletProvider>

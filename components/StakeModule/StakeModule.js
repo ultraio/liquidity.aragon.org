@@ -226,7 +226,7 @@ export default function StakeModule() {
               <a
                 rel="noopener noreferrer"
                 target="_blank"
-                href="https://aragon.org/blog/liquidity-rewards"
+                href="https://ultra.io/articles"
                 css={`
                     &,
                     &:hover {
