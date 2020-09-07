@@ -128,6 +128,7 @@ deploy-staging:
     MEMORY_LIMIT: 1Gi
     MEMORY_REQUEST: 150Mi
     REPLICAS: 2
+    WEBSITE_FRONTEND_URL: https://website.staging.ultra.io
   environment:
     name: staging
     url: $STG_FRONTEND_URL
@@ -154,6 +155,7 @@ deploy-production:
     MEMORY_LIMIT: 1Gi
     MEMORY_REQUEST: 150Mi
     REPLICAS: 2
+    WEBSITE_FRONTEND_URL: https://ultra.io
   environment:
     name: production
     url: $PROD_FRONTEND_URL
