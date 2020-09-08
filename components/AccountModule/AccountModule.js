@@ -109,21 +109,6 @@ function DisconnectedMode() {
                     onActivate={() => activateAndTrack('injected')}
                     image={metamask}
                   />
-                  <ProviderButton
-                    name="Frame"
-                    onActivate={() => activateAndTrack('frame')}
-                    image={frame}
-                  />
-                  <ProviderButton
-                    name="Fortmatic"
-                    onActivate={() => activateAndTrack('fortmatic')}
-                    image={fortmatic}
-                  />
-                  <ProviderButton
-                    name="Portis"
-                    onActivate={() => activateAndTrack('portis')}
-                    image={portis}
-                  />
                 </div>
               </div>
             </StyledPopover>
@@ -263,7 +248,7 @@ const StyledPopover = styled(Popover)`
   border-radius: 4px;
   width: 388px;
   max-width: 90vw;
-  height: 277px;
+  height: 190px;
   right: 100px;
 
   &.bs-popover-bottom .arrow::after {
