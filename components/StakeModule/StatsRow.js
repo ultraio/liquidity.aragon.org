@@ -70,7 +70,7 @@ export default function StatsRow({ balanceUni, decimalsUni, isCompact, isStake }
           {connected
             ? `${TokenAmount.format(balanceUni.toString(), decimalsUni, {
                 symbol: 'UNI',
-                digits: 9,
+                digits: 18,
               })}`
             : '0 (Not connected)'}
         </span>
