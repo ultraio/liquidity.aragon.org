@@ -401,7 +401,7 @@ function StakeSection({ loading, staked }) {
             ? 'loading...'
             : TokenAmount.format(staked, 18, {
                 symbol: 'UNI',
-                digits: 9,
+                digits: 18,
               })}
         </span>
       </div>
@@ -462,7 +462,7 @@ function WithdrawSection({ loading, isCompact, staked }) {
               ? 'loading...'
               : TokenAmount.format(staked, 18, {
                 symbol: 'UNI',
-                digits: 9,
+                digits: 18,
               })}
         </span>
         </div>
@@ -518,7 +518,7 @@ function ClaimSectionReward() {
             >
               {loading
                 ? 'loading...'
-                : TokenAmount.format(paid, 18, { symbol: 'UOS' })}
+                : TokenAmount.format(paid, 18, { symbol: 'UOS', digits: 18 })}
             </span>
           </span>
         </div>
