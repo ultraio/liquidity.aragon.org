@@ -518,7 +518,7 @@ function ClaimSectionReward() {
             >
               {loading
                 ? 'loading...'
-                : TokenAmount.format(paid, 18, { symbol: 'UOS', digits: 18 })}
+                : TokenAmount.format(paid, 18, { symbol: 'UOS', digits: 17 })}
             </span>
           </span>
         </div>
