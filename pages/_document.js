@@ -66,7 +66,7 @@ export default class Document extends NextDocument {
             html, body {
             min-height: 100vh;
             background: no-repeat center/170px url(/splash_1.svg),
-                linear-gradient(289.78deg, #312D36 18.35%, #28262C 80.68%); !important
+                #28262C; !important
             mix-blend-mode: multiply;
             overflow: auto;
             }
