@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import './style.css'
 
-function Header({ logoMode }) {
+function Header({}) {
   return (
     <div>
     <div className="page-header">
@@ -102,10 +102,6 @@ function Header({ logoMode }) {
       </div>
     </div>
   )
-}
-
-Header.propTypes = {
-  logoMode: PropTypes.string,
 }
 
 export default Header
