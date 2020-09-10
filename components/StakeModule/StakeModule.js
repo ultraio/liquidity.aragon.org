@@ -92,6 +92,7 @@ function useConvertInputs() {
 export default function StakeModule() {
   const [activeKey, setActiveKey] = useState(0)
   const [disabled, setDisabled] = useState(false)
+  const [notification, setNotification] = useState('')
 
   const {
     inputValue,
@@ -124,6 +125,11 @@ export default function StakeModule() {
     resetInputs()
   }, [activeKey, connected, resetInputs])
 
+  // Reset notification on connection change
+  useEffect(() => {
+    setNotification('');
+  }, [activeKey, connected])
+
   const handleMax = useCallback(() => {
     const newInputValue = EthersUtils.formatEther(
       selectedTokenBalance.toString()
@@ -134,17 +140,22 @@ export default function StakeModule() {
 
   const handleSubmit = useCallback(async () => {
     try {
+      setNotification('')
       setDisabled(true)
+
       if (SECTIONS[activeKey].id === 'stake') {
         await stake(amount)
+        setNotification(`${amount && amount['_hex'] ? TokenAmount.format(amount['_hex'], 18, {symbol: 'UNI', digits: 18}) : 'UNI'} have been staked.`)
       }
 
       if (SECTIONS[activeKey].id === 'withdraw') {
         await withdraw()
+        setNotification(`${TokenAmount.format(staked, 18, {symbol: 'UNI', digits: 18 })} have been withdrawn.`)
       }
 
       if (SECTIONS[activeKey].id === 'claim') {
         await claim()
+        setNotification(`${TokenAmount.format(paid, 18, { symbol: 'UOS', digits: 17 })} have been claimed.`)
       }
     } catch (err) {
       if (env('NODE_ENV') !== 'production') {
@@ -153,6 +164,10 @@ export default function StakeModule() {
     } finally {
       setDisabled(false)
       resetInputs()
+
+      setTimeout( () => {
+        setNotification('');
+      }, 5000);
     }
   }, [activeKey, amount, claim, resetInputs, stake, withdraw])
 
@@ -163,6 +178,8 @@ export default function StakeModule() {
       disabled,
     [activeKey, amount, disabled, selectedTokenBalance]
   )
+
+  const { paid } = useRewardsPaid(account)
 
   return (
     <div
@@ -177,7 +194,6 @@ export default function StakeModule() {
           flex-direction: column;
           justify-content: flex-start;
           min-width: 880px;
-          min-height: 609px;
           max-width: 100%;
           width: 100%;
           height: 100%;
@@ -218,6 +234,17 @@ export default function StakeModule() {
             <AccountModule  />
           </div>
         </div>
+
+        {connected && notification &&
+          (
+            <Info mode="success" padding="16" Compact={isCompact}>
+              <div>
+                <p css={`margin-bottom: 0;`}>{notification}</p>
+                <p css={`margin-bottom: 0;`}>Please, wait a bit until transaction(s) will be confirmed (see on Etherscan)</p>
+              </div>
+            </Info>
+          )
+        }
 
         {SECTIONS[activeKey].id === 'stake' && (
           <Info mode="info" height="40" padding="0" Compact={isCompact}>
