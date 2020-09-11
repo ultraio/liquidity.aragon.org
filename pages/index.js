@@ -20,12 +20,13 @@ export default () => {
       <div
         css={`
           position: relative;
+          min-height: 800px;
           padding: 6em 0;
           background: transparent;
           display: flex;
           flex-direction: column;
           align-items: center;
-          justify-content: center;
+          justify-content: flex-start;
         `}
       >
         <StakeModule />
