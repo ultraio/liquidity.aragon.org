@@ -587,7 +587,7 @@ function ClaimSectionLiquidityPool() {
               margin-bottom: 10px;
             `}
           >
-            Total UOS in the Uniswap liquidity pool
+            Total $ USD liquidity in the UOS/ETH Uniswap liquidity pool
           </span>
           <span
             css={`
@@ -600,9 +600,9 @@ function ClaimSectionLiquidityPool() {
           >
             {loadingUniswapInfo || !uniswapInfo
               ? 'loading...'
-              : Number(uniswapInfo?.token1?.totalLiquidity ? uniswapInfo?.token1?.totalLiquidity : 0)?.toLocaleString(
+              : '$' + Number(uniswapInfo?.reserveUSD ? uniswapInfo.reserveUSD : 0)?.toLocaleString(
               'en-US'
-              ) + ' UOS' ?? '0 UOS'}{' '}
+              ) ?? '$0'}{' '}
           </span>
         </div>
       </Card>
