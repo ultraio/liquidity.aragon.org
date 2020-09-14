@@ -1,11 +1,13 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import backgroundImg from './assets/default-background.jpg'
 import './style.css'
 
 function Header({}) {
   return (
     <div>
     <div className="page-header">
+     <PageBackdrop />
       <div className="container">
         <div className="social-links header-socials" css={`visibility: hidden;`}>
             <div className="social-link-wrapper">
@@ -103,5 +105,28 @@ function Header({}) {
     </div>
   )
 }
+
+const PageBackdrop = styled.div`
+  background:  url(${backgroundImg}) center 0 no-repeat #28262C;
+  background-size: cover;
+  position: absolute;
+  z-index: 0;
+  height: 980px;
+
+  &:after {
+    display: block;
+    content: '';
+    height: 100%;
+    background: 
+      linear-gradient(359.66deg, #28262C 0%, rgba(40, 38, 44, 0) 100%), 
+      radial-gradient(100% 145.81% at 100% 0%, rgba(49, 45, 54, 0.1) 0%, #312D36 100%), 
+      linear-gradient(60.3deg, #312D36 0%, rgba(49, 45, 54, 0.39) 100%);
+  }
+
+  &,
+  &:after {
+    width: 100%;
+  }
+`
 
 export default Header
