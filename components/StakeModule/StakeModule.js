@@ -167,7 +167,7 @@ export default function StakeModule() {
 
       setTimeout( () => {
         setNotification('');
-      }, 5000);
+      }, 8000);
     }
   }, [activeKey, amount, claim, resetInputs, stake, withdraw])
 
@@ -240,7 +240,7 @@ export default function StakeModule() {
             <Info mode="success" padding="16" Compact={isCompact}>
               <div>
                 <p css={`margin-bottom: 0;`}>{notification}</p>
-                <p css={`margin-bottom: 0;`}>Please, wait a bit until transaction(s) will be confirmed (see on Etherscan)</p>
+                <p css={`margin-bottom: 0;`}>Please, wait a bit until transaction is confirmed (see on Etherscan)</p>
               </div>
             </Info>
           )
@@ -600,7 +600,7 @@ function ClaimSectionLiquidityPool() {
           >
             {loadingUniswapInfo || !uniswapInfo
               ? 'loading...'
-              : '$' + Number(uniswapInfo?.reserveUSD ? uniswapInfo.reserveUSD : 0)?.toLocaleString(
+              : '$' + Math.trunc(Number(uniswapInfo?.reserveUSD ? uniswapInfo.reserveUSD : 0))?.toLocaleString(
               'en-US'
               ) ?? '$0'}{' '}
           </span>
