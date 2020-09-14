@@ -167,7 +167,7 @@ export default function StakeModule() {
 
       setTimeout( () => {
         setNotification('');
-      }, 8000);
+      }, 7000);
     }
   }, [activeKey, amount, claim, resetInputs, stake, withdraw])
 
