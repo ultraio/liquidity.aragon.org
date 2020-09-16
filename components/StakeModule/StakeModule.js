@@ -90,7 +90,7 @@ function useConvertInputs() {
 }
 
 export default function StakeModule() {
-  const [activeKey, setActiveKey] = useState(0)
+  const [activeKey, setActiveKey] = useState(1)
   const [disabled, setDisabled] = useState(false)
   const [notification, setNotification] = useState('')
 
@@ -221,7 +221,6 @@ export default function StakeModule() {
         `}>
           <ButtonGroup
             activeKey={activeKey}
-            disabled={disabled}
             elements={SECTIONS}
             isCompact={isCompact}
             onSetActiveKey={setActiveKey}
@@ -247,7 +246,7 @@ export default function StakeModule() {
         }
 
         {SECTIONS[activeKey].id === 'stake' && (
-          <Info mode="info" height="40" padding="0" Compact={isCompact}>
+          <Info mode="info" height="40" padding="0" isCompact={isCompact}>
             <p css={`margin-bottom: 0;`}>
               <span>Learn </span>
               <a
@@ -269,12 +268,12 @@ export default function StakeModule() {
           </Info>
         )}
         {SECTIONS[activeKey].id === 'withdraw' && (
-          <Info mode="info" padding="0" Compact={isCompact}>
+          <Info mode="info" padding="0" isCompact={isCompact}>
             Withdraw all of your staked UNI.
           </Info>
         )}
         {SECTIONS[activeKey].id === 'claim' && (
-          <Info mode="info" padding="0" Compact={isCompact}>
+          <Info mode="info" padding="0" isCompact={isCompact}>
             Claim all of your rewards from your staked UNI.
           </Info>
         )}
