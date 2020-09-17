@@ -195,12 +195,6 @@
   padding: 0 2rem;
 }
 
-@media (max-width: 640px) {
-  .l-12 {
-    padding: 0 2.5rem;
-  }
-}
-
 .social-links {
   width: 100%;
   display: flex;
@@ -941,23 +935,6 @@
 .l-12 {
   width: 100%;
   padding: 0 2rem;
-}
-
-@media (max-width: 640px) {
-  .l-12 {
-    padding: 0 2.5rem;
-  }
-}
-
-.page-enter-active,
-.page-leave-active {
-  transition: all 0.3s ease-out;
-}
-
-.page-enter,
-.page-leave-active {
-  opacity: 0;
-  transform-origin: 50% 50%;
 }
 
 .page-introduction {
