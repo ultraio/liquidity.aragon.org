@@ -59,6 +59,7 @@ function Logo({
         position: relative;
         display: flex;
         width: 64px;
+        min-width: 64px;
         height: 64px;
         padding: 0;
         white-space: nowrap;

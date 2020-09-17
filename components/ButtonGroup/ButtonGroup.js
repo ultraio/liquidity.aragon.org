@@ -100,4 +100,7 @@ const ButtonBase = styled.button`
   &:focus {
     outline: none;
   }
+  @media (max-width: 415px) {
+    padding: 0;
+  }
 `

@@ -45,6 +45,7 @@ function DisconnectedMode() {
       ref={containerRef}
       css={`
         position: relative;
+        justify-content: flex-end;
         width: 136px;
         height: 32px;
         background: #A481F0;

@@ -112,7 +112,7 @@ export default function StakeModule() {
   const { below } = useViewport()
   // Super ugly Next.js workaround to let us have differences between SSR & client
   const [isCompact, setIsCompact] = useState(false)
-  const smallLayout = below(415)
+  const smallLayout = below(640)
 
   useEffect(() => {
     setTimeout(() => {
@@ -184,8 +184,10 @@ export default function StakeModule() {
   return (
     <div
       css={`
+        width: 100%;
+        max-width: 940px;
         min-height: 492px;
-        margin: 0 auto;
+        padding: 0 32px;
       `}
     >
       <main
@@ -193,8 +195,6 @@ export default function StakeModule() {
           display: flex;
           flex-direction: column;
           justify-content: flex-start;
-          min-width: 880px;
-          max-width: 100%;
           width: 100%;
           height: 100%;
           background: #312D36;
@@ -205,9 +205,8 @@ export default function StakeModule() {
           border-radius: 8px;
           ${isCompact &&
             `
-            max-width: 362px;
             max-height: 100%;
-            padding: 10px;
+            padding: 0 10px 10px;
             justify-content: flex-start;
             overflow: hidden;
           `}
@@ -219,24 +218,32 @@ export default function StakeModule() {
             background: #3C3846;
             border-bottom: 1px solid #55525F;
         `}>
+          <div css={`
+              position: absolute;
+              right: 20px;
+              top: 20px;
+
+              @media (max-width: 920px) {
+                position: relative;
+                right: 0;
+                max-width: calc(100% - 40px);
+                margin: 0 auto 40px;
+                text-align: right;
+              }
+           `}>
+            <AccountModule css={`justify-content: flex-end;`} />
+          </div>
           <ButtonGroup
             activeKey={activeKey}
             elements={SECTIONS}
             isCompact={isCompact}
             onSetActiveKey={setActiveKey}
           />
-          <div css={`
-              position: absolute;
-              right: 20px;
-              top: 20px;
-           `}>
-            <AccountModule  />
-          </div>
         </div>
 
         {connected && notification &&
           (
-            <Info mode="success" padding="16" Compact={isCompact}>
+            <Info mode="success" padding="16" isCompact={isCompact}>
               <div>
                 <p css={`margin-bottom: 0;`}>{notification}</p>
                 <p css={`margin-bottom: 0;`}>Please, wait a bit until transaction is confirmed (see on Etherscan)</p>
@@ -314,7 +321,7 @@ export default function StakeModule() {
                   top: 0px;
                 }
               `)}
-               ${disabled || !connected ? '': `
+               ${disabled || inputError || !connected ? '': `
                  &:hover {
                     background: #AD8EF2;
                   }
@@ -400,6 +407,10 @@ function StakeSection({ loading, staked }) {
           display: flex;
           flex-direction: column;
           margin-left: 20px;
+
+          @media (max-width: 640px) {
+             margin-left: 12px;
+          }
         `}
       >
         <span
@@ -408,6 +419,10 @@ function StakeSection({ loading, staked }) {
             font-weight: 300;
             color: rgba(255, 255, 255, 0.5);
             margin-bottom: 10px;
+
+            @media (max-width: 640px) {
+              font-size: 14px;
+            }
           `}
         >
           Amount of UNI staked
@@ -419,6 +434,9 @@ function StakeSection({ loading, staked }) {
             line-height: 36px;
             color: #FFFFFF;
             display: block;
+            @media (max-width: 640px) {
+              font-size: 14px;
+            }
           `}
         >
           {!connected
@@ -469,6 +487,9 @@ function WithdrawSection({ loading, isCompact, staked }) {
             font-weight: 300;
             color: rgba(255, 255, 255, 0.5);
             margin-bottom: 10px;
+            @media (max-width: 640px) {
+              font-size: 14px;
+            }
           `}
         >
           Amount available to withdraw:
@@ -480,6 +501,9 @@ function WithdrawSection({ loading, isCompact, staked }) {
             line-height: 36px;
             color: #FFFFFF;
             display: block;
+            @media (max-width: 640px) {
+              font-size: 14px;
+            }
           `}
           >
           {!connected
@@ -524,6 +548,9 @@ function ClaimSectionReward() {
               font-weight: 300;
               color: rgba(255, 255, 255, 0.5);
               margin-bottom: 10px;
+              @media (max-width: 640px) {
+                font-size: 14px;
+              }
             `}
           >
             Rewards
@@ -540,6 +567,9 @@ function ClaimSectionReward() {
                 line-height: 36px;
                 color: #FFFFFF;
                 display: block;
+                @media (max-width: 640px) {
+                  font-size: 14px;
+                }
               `}
             >
               {loading
@@ -553,7 +583,7 @@ function ClaimSectionReward() {
   )
 }
 
-function ClaimSectionLiquidityPool() {
+function ClaimSectionLiquidityPool({ isCompact }) {
   const [loadingUniswapInfo, uniswapInfo] = useTokenUniswapInfo('UOS')
 
   return (
@@ -584,9 +614,12 @@ function ClaimSectionLiquidityPool() {
               font-weight: 300;
               color: rgba(255, 255, 255, 0.5);
               margin-bottom: 10px;
+              @media (max-width: 640px) {
+                font-size: 14px;
+              }
             `}
           >
-            Total $ USD liquidity in the UOS/ETH Uniswap liquidity pool
+            {isCompact ? 'Total $ USD liquidity' : 'Total $ USD liquidity in the UOS/ETH Uniswap liquidity pool'}
           </span>
           <span
             css={`
@@ -595,6 +628,9 @@ function ClaimSectionLiquidityPool() {
               line-height: 36px;
               color: #FFFFFF;
               display: block;
+              @media (max-width: 640px) {
+                font-size: 14px;
+              }
             `}
           >
             {loadingUniswapInfo || !uniswapInfo
@@ -615,6 +651,9 @@ const Card = styled.div`
   background: #3C3846;
   border-radius: 4px;
   padding: 20px 24px;
+  @media (max-width: 640px) {
+    padding: 20px 16px;
+  }
 `
 
 const ActionButton = styled.button`

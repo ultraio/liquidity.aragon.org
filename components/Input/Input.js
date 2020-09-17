@@ -61,7 +61,7 @@ function Input({
             width: 100%;
             height: 64px;
             background: rgba(0, 0, 0, 0.2);
-            padding: 20px 12px 20px 16px;
+            padding: 20px 95px 20px 16px;
             color: rgba(255, 255, 255, 0.2);
             box-sizing: border-box;
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -75,6 +75,11 @@ function Input({
               -webkit-appearance: none;
             }
             -moz-appearance: textfield;
+
+            @media (max-width: 640px) {
+              font-size: 14px !important;
+            }
+
             ${!disabled ? `
             &:hover {
               border: 1px solid rgba(255, 255, 255, 0.5);
