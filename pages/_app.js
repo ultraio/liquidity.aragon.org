@@ -19,6 +19,13 @@ const GlobalStyles = createGlobalStyle`
   @font-face {
     font-family: 'Inter';
     src: url('/fonts/Inter-Regular.ttf');
+    src: url('/fonts/inter/Inter-Regular.woff2') format('woff2'),  url('/fonts/inter/Inter-Regular.woff') format('woff');
+  }
+  @font-face {
+    font-family: 'Inter';
+    font-style:  normal;
+    font-weight: 700;
+    src: url('/fonts/inter/Inter-Bold.woff2') format('woff2'), url('../fonts/inter/Inter-Bold.woff') format('woff');
   }
   @font-face {
     font-family: 'Roboto Mono';

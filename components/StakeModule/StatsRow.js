@@ -54,7 +54,7 @@ export default function StatsRow({ balanceUni, decimalsUni, isCompact, isStake }
             `}
         `}
       >
-        Your account’s balance: {' '}
+        <span css={`padding-right: 12px;`}>Your account’s balance:</span> {' '}
         <span
           css={`
             font-family: 'Roboto Mono';
@@ -63,7 +63,6 @@ export default function StatsRow({ balanceUni, decimalsUni, isCompact, isStake }
             font-size: 12px;
             line-height: 20px;
             color: #C5ABFF;
-            padding-left: 12px;
           `}
         >
           {' '}
