@@ -82,6 +82,7 @@ function NavigationMenu({}) {
     </NavigationList>
   )
 }
+
 const NavigationList = styled.nav`
   display: flex;
   flex: 1 2;
