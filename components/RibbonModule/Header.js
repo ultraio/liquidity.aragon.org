@@ -11,9 +11,19 @@ function Header({}) {
       <div className="page-header">
         <PageBackdrop />
         <div className="container">
-          <nav className="navigation-bar">
+          <nav css={`
+              @media (min-width: 920px) {
+                  padding-top: 70px;
+              }
+           `}
+          >
             <div className="main-navigation-wrapper">
-              <div className="main-navigation">
+              <div className="main-navigation"
+                   css={`
+                      display: flex;
+                      flex-direction: row;
+                   `}
+              >
                 <section
                   className="logotype-component logotype"
                   css={`align-self: center;`}
@@ -44,9 +54,25 @@ function Header({}) {
       </div>
       <div className="container">
         <div className="row">
-          <div className="l-12">
-            <div className="page-introduction page-intro-block">
-              <h1 className="intro-title" css={`font-weight: bold;`}>
+          <div css={`
+            width: 100%;
+            padding: 0 2rem;
+          `}
+          >
+            <div css={`
+                padding-top: 7rem;
+                @media (max-width: 640px) {
+                  padding: 2.5rem 0;
+                }
+             `}
+            >
+              <h1 css={`
+                    font-weight: bold;
+                    @media (min-width: 640px) {
+                      min-height: 7.5rem;
+                    }
+                 `}
+              >
                 Uniswap Staking Program
               </h1>
             </div>
