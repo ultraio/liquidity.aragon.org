@@ -36,31 +36,7 @@ function Header({}) {
                     <img src={ultraBrandTextSvg} alt="Ultra Brand Text" width={96} css={`margin-left: 1rem;`} />
                   </a>
                 </section>
-                <nav data-v-72ea3a74="" className="nav-list navigation-menu nav-primary">
-                  <a data-v-72ea3a74="" className="nav-item" href={`${process.env.WEBSITE_FRONTEND_URL}`}>
-                    Home
-                  </a>
-                  <a data-v-72ea3a74="" className="nav-item" href={`${process.env.WEBSITE_FRONTEND_URL}/developers`}>
-                    Developers
-                  </a>
-                  <a data-v-72ea3a74="" className="nav-item" href={`${process.env.WEBSITE_FRONTEND_URL}/technology`}>
-                    Technology
-                  </a>
-                  <a data-v-72ea3a74="" className="nav-item" href={`${process.env.WEBSITE_FRONTEND_URL}/articles`}>
-                    Articles
-                  </a>
-                  <a data-v-72ea3a74="" className="nav-item" href={`${process.env.WEBSITE_FRONTEND_URL}/company`}>
-                    Company
-                  </a>
-                  <a data-v-72ea3a74="" className="nav-item" href={`${process.env.WEBSITE_FRONTEND_URL}/career`}>
-                    Join Us
-                  </a>
-                  <a data-v-72ea3a74="" className="nav-item active-link">
-                    Staking Program
-                  </a>
-                </nav>
-                <div className="social-links header-nav-socials">
-                </div>
+                <NavigationMenu />
               </div>
             </div>
           </nav>
@@ -80,6 +56,102 @@ function Header({}) {
     </div>
   )
 }
+
+function NavigationMenu({}) {
+  const navigationLinks = [
+    { path: '/', title: 'Home' },
+    { path: '/developers', title: 'Developers' },
+    { path: '/technology', title: 'Technology' },
+    { path: '/articles', title: 'Articles' },
+    { path: '/company', title: 'Company' },
+    { path: '/career', title: 'Join Us' },
+    { path: '', title: ' Staking Program', isActive: true },
+  ];
+
+  return (
+    <NavigationList>
+      {navigationLinks.map((link, index) => {
+        return <NavigationLink
+          className={link.isActive ? 'active-link': ''}
+          key={index}
+          href={link.path ? `${process.env.WEBSITE_FRONTEND_URL}${link.path}` : ''}
+        >
+          {link.title}
+        </NavigationLink>
+      })}
+    </NavigationList>
+  )
+}
+const NavigationList = styled.nav`
+  display: flex;
+  flex: 1 2;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding-right: 120px;
+  
+  @media (max-width: 920px) {
+    display: none;
+  }
+  
+  @media (min-width: 1352px) {
+    padding-right: 240px;
+  }
+`
+
+const NavigationLink = styled.a`
+  &,
+  &:hover {
+    color: #ffffff;
+    font-size: 12px;
+    padding: 22px 20px;
+    font-weight: bold;
+    white-space: nowrap;
+    text-decoration: none;
+    transition: 0.2s ease-in-out;
+    opacity: 0.7;
+    cursor: pointer;
+  }
+
+  &.active-link {
+    position: relative;
+    opacity: 1;
+
+    &:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 2px;
+      display: block;
+      background: #a481f0;
+    }
+  }
+
+  &:last-child {
+    margin-right: 1rem;
+  }
+
+  @media (max-width: 920px) {
+    display: flex;
+    align-items: center;
+    min-height: 3.375rem;
+    margin: 0 0.6rem;
+    opacity: 1;
+    font-weight: normal;
+    &.active-link {
+      font-weight: bold;
+      &:after {
+        background: #c5abff;
+      }
+     }
+  }
+  
+  @media (min-width: 920px) and (max-width: 1080px) {
+    padding: 20px 10px;
+  }
+`
 
 const PageBackdrop = styled.div`
   background:  url(${backgroundImg}) center 0 no-repeat #28262C;
