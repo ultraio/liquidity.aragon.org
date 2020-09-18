@@ -9,9 +9,8 @@ function Footer({}) {
               <div className="container text-center">
                 <div className="logotype-wrapper">
                   <a
-                    href="http://ultraio.io/"
-                    aria-label="Logotype"
-                    className="active-link"
+                    href={`${process.env.WEBSITE_FRONTEND_URL}`}
+                    aria-label="Ultra Logotype"
                     ><svg
                       width="45"
                       height="45"
@@ -33,17 +32,13 @@ function Footer({}) {
                   ></a>
                 </div>
                 <div className="links-bar">
-                  <a href="https://ultra.io/terms">
-                    Terms of Use </a
-                  ><a
-                    href="https://ultra.io/documents/privacy-policy/recruitment-privacy-policy.pdf"
-                    className="exact-active-link active-link"
-                  >
-                    Privacy Policy </a
-                  ><a
-                    href="https://ultra.io"
-                    className="exact-active-link active-link"
-                  >
+                  <a href={`${process.env.WEBSITE_FRONTEND_URL}/terms`}>
+                    Terms of Use
+                  </a>
+                  <a href={`${process.env.WEBSITE_FRONTEND_URL}/documents/privacy-policy/recruitment-privacy-policy.pdf`}>
+                    Privacy Policy
+                  </a>
+                  <a href={`${process.env.WEBSITE_FRONTEND_URL}/contact-us`}>
                     Contact us
                   </a>
                 </div>
