@@ -5,7 +5,10 @@ function Footer({}) {
   return (
     <div>
     <div className="layout-default__footer" data-v-314f53c6="">
-            <div className="page-footer bg-theme-secondary-dark" data-v-314f53c6="">
+            <div
+              className="page-footer bg-theme-secondary-dark"
+              css={`background-color: #232026;`}
+            >
               <div className="container text-center">
                 <div className="logotype-wrapper">
                   <a
