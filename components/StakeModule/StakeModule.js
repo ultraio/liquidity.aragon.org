@@ -260,7 +260,7 @@ export default function StakeModule() {
               <a
                 rel="noopener noreferrer"
                 target="_blank"
-                href="https://ultra.io/articles"
+                href={`${process.env.WEBSITE_FRONTEND_URL}/articles`}
                 css={`
                     &,
                     &:hover {
