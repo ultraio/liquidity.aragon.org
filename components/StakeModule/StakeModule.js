@@ -228,7 +228,8 @@ export default function StakeModule() {
                 right: 0;
                 max-width: calc(100% - 40px);
                 margin: 0 auto 40px;
-                text-align: right;
+                display: flex;
+                justify-content: flex-end;
               }
            `}>
             <AccountModule css={`justify-content: flex-end;`} />
