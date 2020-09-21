@@ -54,8 +54,9 @@ function Banner() {
     <div
       className="l-12"
       css={`
-        max-width: 940px;
         width: 100%;
+        max-width: 940px;
+        padding: 0 32px;
         margin-bottom: 50px;
       `}>
       <Info
