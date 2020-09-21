@@ -31,15 +31,15 @@ function Header({}) {
                   <a href={`${process.env.WEBSITE_FRONTEND_URL}`}
                      aria-label="Ultra Logotype"
                      css={`
-                      display: flex;
-                      flex-direction: row;
-                      align-content: center;
-                      align-items: center;
-                      justify-content: center;
-                      margin: 0.75rem 1.2rem;
-                      @media (max-width: 920px) {
-                        margin: 1.4rem 1rem;
-                      }
+                        display: flex;
+                        flex-direction: row;
+                        align-content: center;
+                        align-items: center;
+                        justify-content: center;
+                        margin: 0.75rem 1.2rem;
+                        @media (max-width: 920px) {
+                          margin: 1.4rem 1rem;
+                        }
                      `}
                   >
                     <img src={ultraWhiteLogoSvg} alt="Ultra Logotype Icon" width={32} css={`height: 2rem;`} />
