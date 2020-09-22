@@ -2,8 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 import ultraPurpleLogoSvg from './assets/ultra-purple-logo.svg'
 import './style.css'
+import SocialLinks from "../SocialLinks/SocialLinks";
 
-function Footer({}) {
+function Footer({ socials }) {
   return (
     <div
       css={`
@@ -35,6 +36,13 @@ function Footer({}) {
           </a>
         </div>
         <FooterLinksBar />
+        <SocialLinks
+          socialTypes={socials}
+          additionalStyles={`
+            justify-content: center;
+            padding: 0.5rem 0 0;
+          `}
+        />
       </div>
     </div>
   )
@@ -73,7 +81,8 @@ function FooterLinksBar({}) {
 const FooterBaseLink = styled.a`
   &,
   &:hover {
-   font-size: 16px;
+    font-size: 16px;
+    line-height: 24px;
     color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
     padding-left: 6px;

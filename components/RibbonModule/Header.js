@@ -5,7 +5,7 @@ import ultraWhiteLogoSvg from './assets/ultra-white-logo.svg'
 import backgroundImg from './assets/default-background.jpg'
 import './style.css'
 
-function Header({}) {
+function Header({ socials }) {
   return (
     <div>
       <div className="page-header">
