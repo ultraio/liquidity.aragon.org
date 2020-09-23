@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import ultraPurpleLogoSvg from './assets/ultra-purple-logo.svg'
+import SocialLinks from 'components/SocialLinks/SocialLinks'
 import './style.css'
-import SocialLinks from "../SocialLinks/SocialLinks";
 
 function Footer({ socials }) {
   return (
@@ -38,6 +38,7 @@ function Footer({ socials }) {
         <FooterLinksBar />
         <SocialLinks
           socialTypes={socials}
+          socialDropdownPlacement="top-start"
           additionalStyles={`
             justify-content: center;
             padding: 0.5rem 0 0;

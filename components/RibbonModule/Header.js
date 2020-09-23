@@ -1,18 +1,47 @@
-import React from 'react'
+import React, { useEffect, useState }  from 'react'
+import { useViewport } from 'use-viewport'
 import styled from 'styled-components'
 import ultraBrandTextSvg from './assets/ultra-brand-text.svg'
 import ultraWhiteLogoSvg from './assets/ultra-white-logo.svg'
 import backgroundImg from './assets/default-background.jpg'
+import SocialLinks from 'components/SocialLinks/SocialLinks'
 import './style.css'
 
 function Header({ socials }) {
+  const { below } = useViewport()
+  const [socialsInNav, setSocialsInNav] = useState(false)
+  const [isGtNormalDesktop, setIsGtNormalDesktop] = useState(false)
+  const normalDesktopLayout = !below(1352)
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsGtNormalDesktop(normalDesktopLayout)
+    }, 0)
+  }, [normalDesktopLayout])
+
+  useEffect(() => {
+    setSocialsInNav(
+      socials.filter((item) => item.socials.length).length <=
+      3 && !!isGtNormalDesktop)
+  }, [isGtNormalDesktop])
+
   return (
     <div>
       <div className="page-header">
         <PageBackdrop />
         <div className="container">
+          {!socialsInNav && (
+            <SocialLinks
+            socialTypes={socials}
+            additionalStyles={`
+             @media (max-width: 920px) {
+              display: none;
+             }
+          `}
+            />
+          )}
           <nav css={`
-              @media (min-width: 920px) {
+              @media (min-width: 1352px) {
                   padding-top: 70px;
               }
            `}
@@ -47,6 +76,18 @@ function Header({ socials }) {
                   </a>
                 </section>
                 <NavigationMenu />
+                {socialsInNav && (
+                  <SocialLinks
+                    socialTypes={socials}
+                    socialDropdownPlacement="bottom-start"
+                    additionalStyles={`
+                      max-width: 7.5rem;
+                      align-items: center;
+                      padding: 0 0.75rem 0 0;
+                      margin: -1.25rem 0 0 !important;
+                    `}
+                  />
+                )}
               </div>
             </div>
           </nav>
@@ -115,14 +156,9 @@ const NavigationList = styled.nav`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding-right: 120px;
   
   @media (max-width: 920px) {
     display: none;
-  }
-  
-  @media (min-width: 1352px) {
-    padding-right: 240px;
   }
 `
 

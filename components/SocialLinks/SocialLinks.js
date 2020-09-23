@@ -1,7 +1,12 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import styled from 'styled-components'
+import DropdownComponent from 'components/DropdownComponent/DropdownComponent'
 
-function SocialLinks({ socialTypes, additionalStyles }) {
+function SocialLinks({ socialTypes, additionalStyles, socialDropdownPlacement }) {
+  const handleSocialLinkClick = useCallback(data => {
+    window.open(data.url)
+  }, [])
+
   return (
     <LinksWrapper css={additionalStyles}>
       {socialTypes.map((type, index) => {
@@ -24,7 +29,11 @@ function SocialLinks({ socialTypes, additionalStyles }) {
                     socialIndex === 0 && (
                       <a>
                         <img src={`${process.env.WEBSITE_BACKEND_URL}${type.icon.url}`} alt={social.title} />
-
+                        <DropdownComponent
+                          options={type.socials}
+                          dropdownPlacement={socialDropdownPlacement}
+                          onOptionClick={handleSocialLinkClick}
+                        />
                       </a>
                     )
                   }
@@ -53,30 +62,7 @@ const LinksWrapper = styled.div`
 
       a {
         position: relative;
-
-        .dropdown-component {
-          position: absolute;
-          top: 0;
-          width: inherit;
-
-          button,
-          button:hover {
-            background-color: transparent;
-          }
-
-          button {
-            min-width: inherit;
-
-            span {
-              display: none;
-            }
-          }
-
-          .dropdown-menu {
-            min-width: max-content;
-            left: calc(18px / 2);
-          }
-        }
+        cursor: pointer;
       }
     }
   }

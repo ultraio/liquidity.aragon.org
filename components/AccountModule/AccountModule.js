@@ -6,10 +6,7 @@ import { trackEvent } from 'lib/analytics'
 import { useWalletAugmented } from 'lib/wallet'
 import { shortenAddress } from 'lib/web3-utils'
 
-import fortmatic from './provider-icons/fortmatic.svg'
-import frame from './provider-icons/frame.svg'
 import metamask from './provider-icons/metamask.svg'
-import portis from './provider-icons/portis.svg'
 import logout from './assets/log-out.svg'
 
 function AccountModule() {
