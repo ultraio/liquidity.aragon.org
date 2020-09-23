@@ -39,7 +39,14 @@ function Footer({ socials }) {
         <SocialLinks
           socialTypes={socials}
           socialDropdownPlacement="top-start"
-          additionalStyles={`
+          socialDropdownPopoverStyles={`
+            left: 16px !important;
+
+            @media (min-width: 1700px) {
+              min-width: 16rem !important;
+            }
+          `}
+          socialLinksWrapperStyles={`
             justify-content: center;
             padding: 0.5rem 0 0;
           `}
@@ -99,12 +106,15 @@ const FooterBaseLink = styled.a`
   }
 
   @media (max-width: 920px) {
-    font-size: 12px;
-    line-height: 20px;
-
-    &:not(:last-child):after {
-      top: -2.5px;
-      font-size: 5px;
+    &,
+    &:hover {
+      font-size: 12px;
+      line-height: 20px;
+  
+      &:not(:last-child):after {
+        top: -2.5px;
+        font-size: 5px;
+      }
     }
   }
 `

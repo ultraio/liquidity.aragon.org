@@ -2,7 +2,7 @@ import React, { useCallback, useRef } from 'react'
 import styled from 'styled-components'
 import { OverlayTrigger, Popover } from 'react-bootstrap'
 
-function DropdownComponent({ dropdownPlacement, options, onOptionClick }) {
+function DropdownComponent({ dropdownPlacement, dropdownPopoverStyles, options, onOptionClick }) {
   const overlayRef = useRef()
   const handleDropdownOptionClick = useCallback(data => {
     overlayRef.current.handleHide()
@@ -12,6 +12,8 @@ function DropdownComponent({ dropdownPlacement, options, onOptionClick }) {
   return (
     <div css={`
         position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
         height: 100%;
     `}>
@@ -21,7 +23,7 @@ function DropdownComponent({ dropdownPlacement, options, onOptionClick }) {
         rootClose
         placement={dropdownPlacement}
         overlay={
-          <StyledPopover>
+          <StyledPopover css={dropdownPopoverStyles} >
             <div>
               {options.map((item, index) => {
                 return <div
@@ -69,14 +71,13 @@ function DropdownComponent({ dropdownPlacement, options, onOptionClick }) {
 
 const StyledPopover = styled(Popover)`
   position: absolute;
-  left: 16px !important;
   background: #3C3846;
   border-radius: 4px;
   box-shadow: 0 9px 46px rgba(#000000, 0.12), 0 24px 38px rgba(#000000, 0.14), 0 20px 80px rgba(#000000, 0.25);
   font-size: 12px;
   line-height: 20px;
   color: #FFFFFF;
-  min-width: 16rem;
+  min-width: 11.25rem;
   padding: 8px;
 
   &.bs-popover-bottom .arrow::after {

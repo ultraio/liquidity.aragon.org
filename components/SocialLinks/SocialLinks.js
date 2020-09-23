@@ -2,13 +2,13 @@ import React, { useCallback } from 'react'
 import styled from 'styled-components'
 import DropdownComponent from 'components/DropdownComponent/DropdownComponent'
 
-function SocialLinks({ socialTypes, additionalStyles, socialDropdownPlacement }) {
+function SocialLinks({ socialTypes, socialLinksWrapperStyles, socialDropdownPlacement, socialDropdownPopoverStyles }) {
   const handleSocialLinkClick = useCallback(data => {
     window.open(data.url)
   }, [])
 
   return (
-    <LinksWrapper css={additionalStyles}>
+    <LinksWrapper css={socialLinksWrapperStyles}>
       {socialTypes.map((type, index) => {
         return <div
           className="social-link-wrapper"
@@ -32,6 +32,7 @@ function SocialLinks({ socialTypes, additionalStyles, socialDropdownPlacement })
                         <DropdownComponent
                           options={type.socials}
                           dropdownPlacement={socialDropdownPlacement}
+                          dropdownPopoverStyles={socialDropdownPopoverStyles}
                           onOptionClick={handleSocialLinkClick}
                         />
                       </a>
