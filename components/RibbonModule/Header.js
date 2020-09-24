@@ -11,7 +11,9 @@ import './style.css'
 function Header({ socials }) {
   const { below } = useViewport()
   const [socialsInNav, setSocialsInNav] = useState(false)
+  const [isSmallLayout, setIsSmallLayout] = useState(false)
   const [isGtNormalDesktop, setIsGtNormalDesktop] = useState(false)
+  const smallLayout = below(920)
   const normalDesktopLayout = !below(1352)
 
   const signUpVariants = [
@@ -24,6 +26,12 @@ function Header({ socials }) {
       url: '/sign-up-as-a-player',
     },
   ]
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsSmallLayout(smallLayout)
+    }, 0)
+  }, [smallLayout])
 
   useEffect(() => {
     setTimeout(() => {
@@ -46,7 +54,7 @@ function Header({ socials }) {
       <div className="page-header">
         <PageBackdrop />
         <div className="container">
-          {!socialsInNav && (
+          {!socialsInNav && !isSmallLayout && (
             <SocialLinks
               socialTypes={socials}
               socialDropdownPlacement="bottom-end"
