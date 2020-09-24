@@ -43,7 +43,7 @@ function Header({ socials }) {
     setSocialsInNav(
       socials.filter((item) => item.socials.length).length <=
       3 && !!isGtNormalDesktop)
-  }, [isGtNormalDesktop])
+  }, [isGtNormalDesktop, socials])
 
   const handleSignUpClick = useCallback(data => {
     window.open(`${process.env.WEBSITE_FRONTEND_URL}${data.url}`, "_self")
@@ -70,9 +70,12 @@ function Header({ socials }) {
             />
           )}
           <nav css={`
-              @media (min-width: 1352px) {
+            ${socialsInNav &&
+              `
+                @media (min-width: 1352px) {
                   padding-top: 70px;
-              }
+                }
+              `}
            `}
           >
             <div className="main-navigation-wrapper">
