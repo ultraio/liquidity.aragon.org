@@ -155,7 +155,7 @@ export default function StakeModule() {
 
       if (SECTIONS[activeKey].id === 'claim') {
         await claim()
-        setNotification(`${TokenAmount.format(paid, 18, { symbol: 'UOS', digits: 17 })} have been claimed.`)
+        setNotification(`${TokenAmount.format(paid, 4, { symbol: 'UOS', digits: 17 })} have been claimed.`)
       }
     } catch (err) {
       if (env('NODE_ENV') !== 'production') {
@@ -576,7 +576,7 @@ function ClaimSectionReward() {
             >
               {loading
                 ? 'loading...'
-                : TokenAmount.format(paid, 18, { symbol: 'UOS', digits: 17 })}
+                : TokenAmount.format(paid, 4, { symbol: 'UOS', digits: 17 })}
             </span>
           </span>
         </div>
