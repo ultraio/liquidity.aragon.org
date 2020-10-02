@@ -42,6 +42,7 @@ build-staging:
   variables:
     CHAIN_ID: 4
     WEBSITE_FRONTEND_URL: https://website.staging.ultra.io
+    WEBSITE_BACKEND_URL: ${STG_BACKEND_URL}
   only:
     - master
     - feature/liquidity-ultra-uos
@@ -52,6 +53,7 @@ build-production:
   variables:
     CHAIN_ID: 1
     WEBSITE_FRONTEND_URL: https://ultra.io
+    WEBSITE_BACKEND_URL: ${PROD_BACKEND_URL}
   only:
     - /^[0-9]+\.[0-9]+\.[0-9]+$/
 

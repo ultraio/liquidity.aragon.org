@@ -1,20 +1,81 @@
-import React from 'react'
+import React, { useEffect, useState, useCallback }  from 'react'
+import { useViewport } from 'use-viewport'
 import styled from 'styled-components'
 import ultraBrandTextSvg from './assets/ultra-brand-text.svg'
 import ultraWhiteLogoSvg from './assets/ultra-white-logo.svg'
 import backgroundImg from './assets/default-background.jpg'
+import DropdownComponent from 'components/DropdownComponent/DropdownComponent'
+import SocialLinks from 'components/SocialLinks/SocialLinks'
 import './style.css'
 
-function Header({}) {
+function Header({ socials }) {
+  const { below } = useViewport()
+  const [socialsInNav, setSocialsInNav] = useState(false)
+  const [isSmallLayout, setIsSmallLayout] = useState(false)
+  const [isGtNormalDesktop, setIsGtNormalDesktop] = useState(false)
+  const smallLayout = below(920)
+  const normalDesktopLayout = !below(1352)
+
+  const signUpVariants = [
+    {
+      title: 'Developer Beta',
+      url: '/sign-up-for-closed-beta',
+    },
+    {
+      title: 'Player Beta',
+      url: '/sign-up-as-a-player',
+    },
+  ]
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsSmallLayout(smallLayout)
+    }, 0)
+  }, [smallLayout])
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsGtNormalDesktop(normalDesktopLayout)
+    }, 0)
+  }, [normalDesktopLayout])
+
+  useEffect(() => {
+    setSocialsInNav(
+      socials.filter((item) => item.socials.length).length <=
+      3 && !!isGtNormalDesktop)
+  }, [isGtNormalDesktop, socials])
+
+  const handleSignUpClick = useCallback(data => {
+    window.open(`${process.env.WEBSITE_FRONTEND_URL}${data.url}`, "_self")
+  }, [])
+
   return (
     <div>
       <div className="page-header">
         <PageBackdrop />
         <div className="container">
+          {!socialsInNav && !isSmallLayout && (
+            <SocialLinks
+              socialTypes={socials}
+              socialDropdownPlacement="bottom-end"
+              socialDropdownPopoverStyles={`
+                top: 3px !important;
+              `}
+              socialLinksWrapperStyles={`
+                 min-width: max-content;
+                 @media (max-width: 920px) {
+                  display: none;
+                 }
+              `}
+            />
+          )}
           <nav css={`
-              @media (min-width: 920px) {
+            ${socialsInNav &&
+              `
+                @media (min-width: 1352px) {
                   padding-top: 70px;
-              }
+                }
+              `}
            `}
           >
             <div className="main-navigation-wrapper">
@@ -47,6 +108,37 @@ function Header({}) {
                   </a>
                 </section>
                 <NavigationMenu />
+                {socialsInNav && (
+                  <SocialLinks
+                    socialTypes={socials}
+                    socialDropdownPlacement="bottom-start"
+                    socialDropdownPopoverStyles={`
+                      left: 16px !important;
+                      top: 3px !important;
+
+                      @media (min-width: 1700px) {
+                        min-width: 16rem !important;
+                      }
+                    `}
+                    socialLinksWrapperStyles={`
+                      max-width: 7.5rem;
+                      align-items: center;
+                      padding: 0 0.75rem 0 0;
+                      margin: -1.25rem 0 0 !important;
+                    `}
+                  />
+                )}
+                <ButtonBase>
+                  Sign Up
+                  <DropdownComponent
+                    options={signUpVariants}
+                    dropdownPlacement="bottom-end"
+                    dropdownPopoverStyles={`
+                       top: 3px !important;
+                    `}
+                    onOptionClick={handleSignUpClick}
+                  />
+                </ButtonBase>
               </div>
             </div>
           </nav>
@@ -115,14 +207,9 @@ const NavigationList = styled.nav`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding-right: 120px;
   
   @media (max-width: 920px) {
     display: none;
-  }
-  
-  @media (min-width: 1352px) {
-    padding-right: 240px;
   }
 `
 
@@ -201,6 +288,42 @@ const PageBackdrop = styled.div`
   &:after {
     width: 100%;
   }
+`
+
+const ButtonBase = styled.button`
+  position: relative;
+  max-width: 11.25rem;
+  align-self: center;
+  margin-right: 0.4rem;
+  margin-left: auto;
+  background: #A481F0;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1rem;
+  padding: 0.5rem 1rem;
+  max-height: 32px;
+  
+  &:focus,
+  &:hover {
+    outline: none;
+    background: #946aed;
+    box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.14), 0px 3px 14px rgba(0, 0, 0, 0.12), 0px 4px 5px rgba(0, 0, 0, 0.2);
+  }   
+  
+  @media (max-width: 640px) {
+    font-size: 10px;
+    line-height: 12px;
+    padding: 0.375rem 1rem;
+  }
+  
+  @media (min-width: 640px) {
+    min-width: 7.5rem;
+  }             
 `
 
 export default Header

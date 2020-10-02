@@ -1,9 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import ultraPurpleLogoSvg from './assets/ultra-purple-logo.svg'
+import SocialLinks from 'components/SocialLinks/SocialLinks'
 import './style.css'
 
-function Footer({}) {
+function Footer({ socials }) {
   return (
     <div
       css={`
@@ -35,6 +36,21 @@ function Footer({}) {
           </a>
         </div>
         <FooterLinksBar />
+        <SocialLinks
+          socialTypes={socials}
+          socialDropdownPlacement="top-start"
+          socialDropdownPopoverStyles={`
+            left: 16px !important;
+
+            @media (min-width: 1700px) {
+              min-width: 16rem !important;
+            }
+          `}
+          socialLinksWrapperStyles={`
+            justify-content: center;
+            padding: 0.5rem 0 0;
+          `}
+        />
       </div>
     </div>
   )
@@ -73,7 +89,8 @@ function FooterLinksBar({}) {
 const FooterBaseLink = styled.a`
   &,
   &:hover {
-   font-size: 16px;
+    font-size: 16px;
+    line-height: 24px;
     color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
     padding-left: 6px;
@@ -89,12 +106,15 @@ const FooterBaseLink = styled.a`
   }
 
   @media (max-width: 920px) {
-    font-size: 12px;
-    line-height: 20px;
-
-    &:not(:last-child):after {
-      top: -2.5px;
-      font-size: 5px;
+    &,
+    &:hover {
+      font-size: 12px;
+      line-height: 20px;
+  
+      &:not(:last-child):after {
+        top: -2.5px;
+        font-size: 5px;
+      }
     }
   }
 `
