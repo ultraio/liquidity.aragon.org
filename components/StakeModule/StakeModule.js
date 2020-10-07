@@ -105,7 +105,7 @@ export default function StakeModule() {
   const { account, connected } = useWalletAugmented()
   const selectedTokenBalance = useBalanceOf('TOKEN_UNI')
   const { loading: loadingStaked, staked } = useUniStaked(account)
-  const decimalsUni = useTokenDecimals('UNI')
+  const decimalsUni = useTokenDecimals('UNI-V2')
   const claim = useClaim()
   const stake = useStake()
   const withdraw = useWithdraw()
@@ -145,12 +145,12 @@ export default function StakeModule() {
 
       if (SECTIONS[activeKey].id === 'stake') {
         await stake(amount)
-        setNotification(`${amount && amount['_hex'] ? TokenAmount.format(amount['_hex'], 18, {symbol: 'UNI', digits: 18}) : 'UNI'} have been staked.`)
+        setNotification(`${amount && amount['_hex'] ? TokenAmount.format(amount['_hex'], 18, {symbol: 'UNI-V2', digits: 18}) : 'UNI-V2'} have been staked.`)
       }
 
       if (SECTIONS[activeKey].id === 'withdraw') {
         await withdraw()
-        setNotification(`${TokenAmount.format(staked, 18, {symbol: 'UNI', digits: 18 })} have been withdrawn.`)
+        setNotification(`${TokenAmount.format(staked, 18, {symbol: 'UNI-V2', digits: 18 })} have been withdrawn.`)
       }
 
       if (SECTIONS[activeKey].id === 'claim') {
@@ -270,7 +270,7 @@ export default function StakeModule() {
                 `}
               >
                 {' '}
-                how to obtain UNI
+                how to obtain UNI-V2
               </a>
               <span> to participate in the rewards program.</span>
             </p>
@@ -278,12 +278,12 @@ export default function StakeModule() {
         )}
         {SECTIONS[activeKey].id === 'withdraw' && (
           <Info mode="info" padding="0" isCompact={isCompact}>
-            Withdraw all of your staked UNI.
+            Withdraw all of your staked UNI-V2.
           </Info>
         )}
         {SECTIONS[activeKey].id === 'claim' && (
           <Info mode="info" padding="0" isCompact={isCompact}>
-            Claim all of your rewards from your staked UNI.
+            Claim all of your rewards from your staked UNI-V2.
           </Info>
         )}
         {!connected && (
@@ -427,7 +427,7 @@ function StakeSection({ loading, staked }) {
             }
           `}
         >
-          Amount of UNI staked
+          Amount of UNI-V2 staked
         </span>
         <span
           css={`
@@ -442,11 +442,11 @@ function StakeSection({ loading, staked }) {
           `}
         >
           {!connected
-            ? '0 UNI'
+            ? '0 UNI-V2'
             : loading
             ? 'loading...'
             : TokenAmount.format(staked, 18, {
-                symbol: 'UNI',
+                symbol: 'UNI-V2',
                 digits: 18,
               })}
         </span>
@@ -509,11 +509,11 @@ function WithdrawSection({ loading, isCompact, staked }) {
           `}
           >
           {!connected
-            ? '0 UNI'
+            ? '0 UNI-V2'
             : loading
               ? 'loading...'
               : TokenAmount.format(staked, 18, {
-                symbol: 'UNI',
+                symbol: 'UNI-V2',
                 digits: 18,
               })}
         </span>
