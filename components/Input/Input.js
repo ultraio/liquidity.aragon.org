@@ -10,7 +10,7 @@ function Input({
   onChange = noop,
   onFocus = noop,
   onMax = noop,
-  placeholder = 'Enter UNI Amount',
+  placeholder = 'Enter UNI-V2 Amount',
 }) {
   const [opened, setOpened] = useState(false)
   const buttonRef = useRef()

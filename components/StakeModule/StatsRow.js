@@ -40,7 +40,7 @@ export default function StatsRow({ balanceUni, decimalsUni, isCompact, isStake }
             color: rgba(255, 255, 255, 0.25);
           `}
         >
-          {isStake ? 'Amount of UNI to Stake:' : ''}
+          {isStake ? 'Amount of UNI-V2 to Stake:' : ''}
         </span>
       </div>
       <div
@@ -68,7 +68,7 @@ export default function StatsRow({ balanceUni, decimalsUni, isCompact, isStake }
           {' '}
           {connected
             ? `${TokenAmount.format(balanceUni.toString(), decimalsUni, {
-                symbol: 'UNI',
+                symbol: 'UNI-V2',
                 digits: 18,
               })}`
             : '0 (Not connected)'}
