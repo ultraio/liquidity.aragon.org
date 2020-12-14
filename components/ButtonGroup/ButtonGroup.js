@@ -1,8 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react'
 import styled from 'styled-components'
 
-const WITHDRAW_KEY = 1
-
 export default function ButtonGroup({
   activeKey,
   disabled,
@@ -27,7 +25,7 @@ export default function ButtonGroup({
     >
       {elements.map((el, idx) => (
         <Button
-          disabled={idx !== WITHDRAW_KEY}
+          disabled={disabled && activeKey !== idx}
           activeKey={activeKey}
           key={el.id}
           lastChild={elements.length - 1 === idx}
@@ -57,7 +55,6 @@ function Button({
 
   return (
     <ButtonBase
-      disabled={disabled}
       onClick={setSelected}
       css={`
         ${disabled ? 'color: rgba(255,255,255,0.4);' : ''}
@@ -83,15 +80,6 @@ const ButtonBase = styled.button`
   height: 72px;
   cursor: pointer;
   transition: all 0.1s ease-out;
-  &:disabled {
-    border: 0px;
-    cursor: 'normal';
-    pointer-events: none;
-  }
-  &:focus {
-    outline: none;
-    border-bottom: 2px solid #7A52D1;
-  }
   &:active {
     top: 1px;
     border-bottom: 2px solid #A481F0;

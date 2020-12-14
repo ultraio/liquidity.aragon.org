@@ -90,7 +90,7 @@ function useConvertInputs() {
 }
 
 export default function StakeModule() {
-  const [activeKey, setActiveKey] = useState(1)
+  const [activeKey, setActiveKey] = useState(0)
   const [disabled, setDisabled] = useState(false)
   const [notification, setNotification] = useState('')
 
@@ -236,6 +236,7 @@ export default function StakeModule() {
           </div>
           <ButtonGroup
             activeKey={activeKey}
+            disabled={disabled}
             elements={SECTIONS}
             isCompact={isCompact}
             onSetActiveKey={setActiveKey}
