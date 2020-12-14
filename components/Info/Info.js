@@ -3,7 +3,6 @@ import React from 'react'
 const MODES = new Map([
   ['info', { background: '', color: 'rgba(255, 255, 255, 0.7)' }],
   ['warning', { background: 'rgba(179, 173, 255, 0.1)', color: '#C5ABFF'}],
-  ['mandatory-warning', { background: '#A481F0', color: '#FFFFFF'}],
   ['success', { background: 'rgba(144, 242, 154, 0.1)', color: '#8CE895'}],
 ])
 
