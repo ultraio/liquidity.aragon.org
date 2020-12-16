@@ -261,7 +261,7 @@ export default function StakeModule() {
               <a
                 rel="noopener noreferrer"
                 target="_blank"
-                href="https://medium.com/@mangicrypto/uniswap-liquidity-reward-776160a6afaf"
+                href="https://medium.com/ultra-io/uos-liquidity-reward-program-2-on-uniswap-9899e887525"
                 css={`
                     &,
                     &:hover {
