@@ -105,8 +105,8 @@ function Banner() {
         isCompact={isCompact}
       >
         {isCompact
-          ? 'The first UOS liquidity program has ended.'
-          : 'The first UOS Liquidity Rewards program has ended.'}
+          ? 'The UOS liquidity program has ended.'
+          : 'The UOS Liquidity Rewards program has ended.'}
       </Info>
     </div>
   )
